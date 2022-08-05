@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+    <head>
+        <%- include('../views/t_head.ejs') %>
+    </head>
+    <body>
+        <%- include('../views/t_header.ejs') %>
+
+        <h1>
+            Sponsors
+        </h1>
+        <hr/>
+
+        <div class="screen60percent">
+            <div class="sponsors-page">
+                <%
+                    var sponsors = database[0].sponsors
+                    if(sponsors.length){
+                        for(var i=0; i<sponsors.length; i++){
+                            var currEl = sponsors[i]
+                %>
+                            <div class="sponsor-container">
+                                <%
+                                    if(currEl.url){
+                                
+                                %>
+                                        <a href="<%=currEl.url%>" target="_blank">
+                                            <img src="/images/upload/sponsors/<%=currEl.foto%>" alt="sponsor">
+                                        </a>
+                                <%
+                                    }else{
+                                %>
+                                        <img src="/images/upload/sponsors/<%=currEl.foto%>" alt="sponsor">
+                                <%
+                                    }
+                                %>
+                                
+                            </div>
+                <%
+                        }
+                    }
+                %>
+            </div>
+        </div>
+            
+        <%- include('../views/t_footer.ejs') %>
+    </body>
+</html>

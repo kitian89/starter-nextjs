@@ -1,0 +1,1129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+    <head>
+        <title>ASD TAGLIAMENTO</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="robots" content="noindex">
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <link type="text/css" href="/stylesheets/t_globals.css" rel="stylesheet"/>
+        <link type="text/css" href="/stylesheets/t_globals-mobile.css" rel="stylesheet"/>
+
+        <link type="text/css" href="/stylesheets/carousel.css" rel="stylesheet"/>
+        <script src="/javascripts/t_globals.js"></script>
+        
+        <script>
+            $(document).ready(function(){
+                $('.expand').on('click', function(){
+                    var that = $(this),
+                        isVisible = that.next('.content').is(':visible')
+                    console.log('isVisible: ' + isVisible)
+                    setTimeout(function(){
+                        $('.content').hide()
+                    }, 50)
+                    
+                    setTimeout(function(){
+                        if(!isVisible){
+                            that.next('.content').toggle()
+                        }
+                    }, 100)
+                    
+                })
+
+                $('.news .editButton').on('click', function(){
+                    var that = $(this)
+
+                    $('.popup.show').removeClass('show')
+                    
+                    setTimeout(function(){
+                        that.parent().next('.popup').addClass('show')
+                    }, 250)
+                    
+                })
+
+                $('.player .editButton, .organization .editButton, .sponsors .editButton').on('click', function(){
+                    var that = $(this)
+
+                    $('.popup.show').removeClass('show')
+                    
+                    setTimeout(function(){
+                        that.parent().parent().next('.popup').addClass('show')
+                    }, 250)
+                })
+
+                $('.popup .close-button').on('click', function(){
+                    $(this).parent().removeClass('show')
+                })
+
+                //$(document).on('click', 'form.async input[type="submit"], form.async button.removeButton', function(e){
+                /*
+                $(document).on('click', 'form.async button.removeButton', function(e){
+                    e.preventDefault()
+                    var that = $(this)
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: window.location.href,
+                        data: that.closest('form').serialize(),
+                        success: function(data){
+                            $(data).find('.content').each(function(){
+                                var that = $(this),
+                                    contClasses = '.' + that.attr('class').replace(/ /g, '.')
+
+                                $(contClasses).html(that.html())
+                            })
+                        }
+                    });
+                })
+                */
+            })
+        </script>
+
+        <style>
+            main {
+                margin: 0 20%;
+                width: 60%;
+            }
+
+            main .content {
+                display: none;
+            }
+
+            main form {
+                padding: 20px 0;
+            }
+
+            form legend {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            form .form-input {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+            }
+
+            form .form-input > div:first-of-type {
+                width: 30%;
+            }
+
+            form .form-input > div:last-of-type {
+                width: 70%;
+            }
+
+            form .form-input > *:first-of-type {
+                color: #444;
+                font-size: 20px;
+                text-align: center;
+            }
+
+            form input:not([type="file"]),
+            form select {
+                font-size: 25px;
+                height: 40px;
+                width: 100%;
+            }
+
+            form input[type="submit"] {
+                margin-top: 30px;
+                background: #167D39;
+                border-color: #167D39;
+                color: #FFF;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            form textarea {
+                font-size: 25px;
+                height: 100px;
+                width: 100%;
+            }
+
+            .tabella .header,
+            .tabella .line {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .tabella .header{
+                border-bottom: 3px solid #167D39;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .tabella .line {
+                border-bottom: 1px solid #167D39;
+            }
+
+            .tabella .header > div,
+            .tabella .line > div {
+                padding: 10px;
+            }
+
+            .home_banner_img {
+                border-bottom: 3px solid #167D39;
+                margin: 20px auto;
+                max-width: 50%;
+                padding: 20px;
+            }
+
+            .home_banner_img,
+            .news-container,
+            .player-container,
+            .sponsors-container,
+            .contributi-container {
+                position: relative;
+            }
+
+            .home_banner_img img,
+            .news-container  img,
+            .player-container img,
+            .sponsors-container .removeButton img,
+            .contributi-container img {
+                width: 100%;
+            }
+
+            .home_banner_img .removeButton,
+            .news-container .removeButton,
+            .contributi-container .removeButton {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 50px;
+            }
+
+            .news-container .editButton,
+            .contributi-container .editButton {
+                position: absolute;
+                right: 50px;
+                top: 0;
+                width: 50px;
+            }
+
+            .player-container .removeButton,
+            .sponsors-container .removeButton {
+                width: 50px;
+            }
+
+            .people_img {
+                width: 50px;
+            }
+
+            .sponsors-container .tabella img.sponsor {
+                width: 100px;
+            }
+
+            .hide {
+                display: none;
+            }
+
+            .popup.show {
+                background: #FFF;
+                border: 2px solid;
+                display: block !important;
+                left: 0;
+                margin: 0 auto;
+                padding: 20px;
+                position: fixed;
+                right: 0;
+                top: 200px;
+                width: 700px;
+                z-index: 10;
+            }
+
+            .popup .close-button {
+                position: absolute;
+                right: 10px;
+                top: 0px;
+            }
+            .popup .close-button img {
+                width: 30px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <% 
+            var databaseID = database[0].id
+        %>
+
+        <h1>
+            Admin
+        </h1>
+        <hr/>
+        
+        <main>
+            <!-- HOME BANNER -->
+            <h2 class="expand">HOME BANNER</h2>
+            
+            <div class="content homebanner">
+                <h3>Preview (lista)</h3>
+
+                <%
+                    var homeCarousel = database[0].homeCarousel
+                    if(homeCarousel.length){
+                        for(var i=0; i<homeCarousel.length; i++){
+                            var currEl = homeCarousel[i]
+                %>
+                        <div class="home_banner_img">
+                            <img src="/images/upload/home/<%=currEl.foto%>" alt="img" class=""/>
+
+                            <div class="removeButton">
+                                <form class="async" id="removeCategory" class="inline" method="POST">
+                                    <input type="hidden" name="form-submitted" value="removeHomeBanner"/>
+                                    <input type="hidden" name="home-banner-id" value="<%=currEl._id%>"/>
+                                    <input type="hidden" name="idDatabase" value="<%=databaseID%>"/>
+                                    <button class="removeButton inline" title="Elimina banner">
+                                        <img src="/images/trash-icon.png" alt="edit"/>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                <%
+                        }
+                    }
+                    else{
+                %>
+                        <b>---- Nessuna immagine inserita!! ----</b>
+                <%
+                    }
+                %>
+                
+                
+                <form ref='uploadForm' class="async" id='uploadForm' method='post' encType="multipart/form-data">
+                    <fieldset>
+                        <legend>Aggiungi immagine al banner:</legend>
+                        
+                        <div class="form-input">
+                            <div>
+                                <label for="home_banner_img">Immagine Desktop</label>
+                            </div>
+                            <div>
+                                <input type="file" name="sampleFile" id="home_banner_img"/>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="form-submitted" value="addBanner"/>
+                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                        <input type="submit" value="Aggiungi"/>
+                    </fieldset>
+                </form>
+            </div>
+            <hr/>
+            
+            <!-- HOME BANNER MOBILE -->
+            <h2 class="expand">HOME BANNER MOBILE</h2>
+            
+            <div class="content homebanner">
+                <h3>Preview (lista)</h3>
+
+                <%
+                    var homeCarouselMobile = database[0].homeCarouselMobile
+                    if(homeCarouselMobile.length){
+                        for(var i=0; i<homeCarouselMobile.length; i++){
+                            var currEl = homeCarouselMobile[i]
+                %>
+
+                        <div class="home_banner_img">
+                            <img src="/images/upload/home/<%=currEl.foto%>" alt="img" class=""/>
+
+                            <div class="removeButton">
+                                <form class="async" id="removeCategory" class="inline" method="POST">
+                                    <input type="hidden" name="form-submitted" value="removeHomeBannerMobile"/>
+                                    <input type="hidden" name="home-banner-id" value="<%=currEl._id%>"/>
+                                    <input type="hidden" name="idDatabase" value="<%=databaseID%>"/>
+                                    <button class="removeButton inline" title="Elimina banner">
+                                        <img src="/images/trash-icon.png" alt="edit"/>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                <%
+                        }
+                    }
+                    else{
+                %>
+                        <b>---- Nessuna immagine inserita!! ----</b>
+                <%
+                    }
+                %>
+                
+                
+                <form ref='uploadForm' class="async" id='uploadForm' method='post' encType="multipart/form-data">
+                    <fieldset>
+                        <legend>Aggiungi immagine al banner:</legend>
+
+                        <div class="form-input">
+                            <div>
+                                <label for="home_banner_img_mobile">Immagine mobile</label>
+                            </div>
+                            <div>
+                                <input type="file" name="sampleFile" id="home_banner_img_mobile"/>
+                            </div>
+                        </div>
+
+
+                        <input type="hidden" name="form-submitted" value="addBannerMobile"/>
+                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                        <input type="submit" value="Aggiungi"/>
+                    </fieldset>
+                </form>
+            </div>
+
+            <hr/>
+            <!-- NEWS -->
+            <h2 class="expand">NEWS</h2>
+
+            <div class="content news">
+                <h3>Preview</h3>
+                <%
+                    var news = database[0].news
+                    if(news.length){
+                        for(var i=0; i<news.length; i++){
+                            var currEl = news[i]
+                %>
+                        <div class="news-container clearfix">
+                            <div class="foto">
+                                <img src="/images/upload/news/<%=currEl.foto%>" alt="img"/>
+                            </div>
+                            <div class="news-content">
+                                <h2><%=currEl.titolo%></h2>
+                                <div class="descrizione">
+                                    <%=currEl.descrizione%>
+                                </div>
+                            </div>
+                            <button class="editButton inline" title="edit banner">
+                                <img src="/images/edit-icon.png" alt="edit"/>
+                            </button>
+                            <div class="removeButton">
+                                <form class="async" id="removeNews" class="inline" method="POST">
+                                    <input type="hidden" name="form-submitted" value="removeNews"/>
+                                    <input type="hidden" name="news-id" value="<%=currEl._id%>"/>
+                                    <input type="hidden" name="idDatabase" value="<%=databaseID%>"/>
+                                    <button class="removeButton inline" title="Elimina banner">
+                                        <img src="/images/trash-icon.png" alt="edit"/>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="hide popup">
+                            <div class="close-button">
+                                <img src="/images/close-button.png" alt="close"/>
+                            </div>
+                            <form ref='uploadForm' class="async" id='uploadForm' method='post' encType="multipart/form-data">
+                                <fieldset>
+                                    <legend>Modifica news:</legend>
+                                    
+                                    <div class="form-input">
+                                        <div>
+                                            <label for="news_titolo">Titolo</label>
+                                        </div>
+                                        <div>
+                                            <input type="text" value="<%=currEl.titolo%>" name="news_titolo" id="news_titolo"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="news_image">Nuova immagine</label>
+                                            </div>
+                                            <div>
+                                                <input type="file" name="sampleFile" id="news_img"/>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="news_descrizione">Descrizione</label>
+                                            </div>
+                                            <div>
+                                                <textarea name="news_descrizione" id="news_descrizione"><%=currEl.descrizione%></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <input type="hidden" name="form-submitted" value="editNews"/>
+                                    <input type="hidden" name="news-oldImg" value="<%=currEl.foto%>"/>
+                                    <input type="hidden" name="news-id" value="<%=currEl._id%>"/>
+                                    <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                    <input type="submit" value="Modifica"/>
+                                </fieldset>
+                            </form>
+                        </div>
+                <%
+                        }
+                    }
+                    else{
+                %>
+                        <b>---- Nessuna news inserita!! ----</b>
+                <%
+                    }
+                %>
+                
+                
+                <form ref='uploadForm' class="async" id='uploadForm' method='post' encType="multipart/form-data">
+                    <fieldset>
+                        <legend>Aggiungi news:</legend>
+                        
+                        <div class="form-input">
+                            <div>
+                                <label for="news_titolo">Titolo</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="news_titolo" id="news_titolo"/>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-input">
+                                <div>
+                                    <label for="news_image">Immagine</label>
+                                </div>
+                                <div>
+                                    <input type="file" name="sampleFile" id="news_img"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-input">
+                                <div>
+                                    <label for="news_descrizione">Descrizione</label>
+                                </div>
+                                <div>
+                                    <textarea name="news_descrizione" id="news_descrizione"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="form-submitted" value="addNews"/>
+                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                        <input type="submit" value="Aggiungi"/>
+                    </fieldset>
+                </form>
+            </div>
+            
+            <hr/>
+
+            <!-- ROSA -->
+            <h2 class="expand">ROSA</h2>
+
+            <div class="content player player-container">
+                <h3>Preview (lista)</h3>
+
+                <div class="tabella">
+                    <div class="header">
+                        <div>Nome</div>
+                        <div>Cognome</div>
+                        <div>Ruolo</div>
+                        <div>Foto</div>
+                        <div>Azioni</div>
+                    </div>
+                    <%
+                        var giocatore = database[0].rosa
+                        if(giocatore.length){
+                            for(var i=0; i<giocatore.length; i++){
+                                var currEl = giocatore[i]
+                    %>
+                            <div class="line">
+                                <div><%=currEl.nome%></div>
+                                <div><%=currEl.cognome%></div>
+                                <div><%=currEl.ruolo%></div>
+                                <div class="people_img"><img src="/images/upload/people/<%=currEl.foto%>" alt="img"/></div>
+                                
+                                <div class="removeButton">
+                                    <button class="editButton inline" title="edit banner">
+                                        <img src="/images/edit-icon.png" alt="edit"/>
+                                    </button>
+                                    <form class="async" id="removePlayer" class="inline" method="POST">
+                                        <input type="hidden" name="form-submitted" value="removePlayer"/>
+                                        <input type="hidden" name="player-id" value="<%=currEl._id%>"/>
+                                        <input type="hidden" name="idDatabase" value="<%=databaseID%>"/>
+                                        <button class="removeButton inline" title="Elimina banner">
+                                            <img src="/images/trash-icon.png" alt="edit"/>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="hide popup">
+                                <div class="close-button">
+                                    <img src="/images/close-button.png" alt="close"/>
+                                </div>
+                                <form class="async" ref='uploadForm' id='uploadForm' method='post' encType="multipart/form-data">
+                                    <fieldset>
+                                        <legend>Modifica giocatore:</legend>
+                                        
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="giocatore_nome">Nome</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" value="<%=currEl.nome%>" name="giocatore_nome" id="giocatore_nome"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="giocatore_cognome">Cognome</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" value="<%=currEl.cognome%>" name="giocatore_cognome" id="giocatore_cognome"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="giocatore_ruolo">Ruolo</label>
+                                            </div>
+                                            <div>
+                                                <select name="giocatore_ruolo" id="giocatore_ruolo">
+                                                    <option value="Portiere" <%='Portiere' == currEl.ruolo ? 'selected' : ''%>>Portiere</option>
+                                                    <option value="Difensore"  <%='Difensore' == currEl.ruolo ? 'selected' : ''%>>Difensore</option>
+                                                    <option value="Centrocampista" <%='Centrocampista' == currEl.ruolo ? 'selected' : ''%>>Centrocampista</option>
+                                                    <option value="Attaccante" <%='Attaccante' == currEl.ruolo ? 'selected' : ''%>>Attaccante</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-input">
+                                                <div>
+                                                    <label for="giocatore_foto">Nuova Immagine</label>
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="sampleFile" id="giocatore_img"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <input type="hidden" name="form-submitted" value="editPlayer"/>
+                                        <input type="hidden" name="player-oldImg" value="<%=currEl.foto%>"/>
+                                        <input type="hidden" name="player-id" value="<%=currEl._id%>"/>
+                                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                        <input type="submit" value="Modifica"/>
+                
+                                    </fieldset>
+                                </form>
+                            </div>
+                    <%
+                            }
+                        }
+                        else{
+                    %>
+                            <b>---- Nessun giocatore inserito!! ----</b>
+                    <%
+                        }
+                    %>
+                    
+                </div>
+
+                <form ref='uploadForm' class="async" id='uploadForm' method='post' encType="multipart/form-data">
+                    <fieldset>
+                        <legend>Aggiungi giocatore:</legend>
+                        
+                        <div class="form-input">
+                            <div>
+                                <label for="giocatore_nome">Nome</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="giocatore_nome" id="giocatore_nome"/>
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <div>
+                                <label for="giocatore_cognome">Cognome</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="giocatore_cognome" id="giocatore_cognome"/>
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <div>
+                                <label for="giocatore_ruolo">Ruolo</label>
+                            </div>
+                            <div>
+                                <select name="giocatore_ruolo" id="giocatore_ruolo">
+                                    <option value="Portiere">Portiere</option>
+                                    <option value="Difensore">Difensore</option>
+                                    <option value="Centrocampista">Centrocampista</option>
+                                    <option value="Attaccante">Attaccante</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-input">
+                                <div>
+                                    <label for="giocatore_foto">Immagine</label>
+                                </div>
+                                <div>
+                                    <input type="file" name="sampleFile" id="giocatore_img"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" name="form-submitted" value="addPlayer"/>
+                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                        <input type="submit" value="Aggiungi"/>
+
+                    </fieldset>
+                </form>
+            </div>
+            
+            <hr/>
+
+            <!-- ORGANIGRAMMA -->
+            <h2 class="expand">ORGANIGRAMMA</h2>
+
+            <div class="content organization player-container">
+                <h3>Preview (lista)</h3>
+                <div class="tabella">
+                    <div class="header">
+                        <div>Nome</div>
+                        <div>Cognome</div>
+                        <div>Ruolo</div>
+                        <div>Foto</div>
+                        <div>Azioni</div>
+                    </div>
+                    <%
+                        var componente = database[0].organigramma
+                        if(componente.length){
+                            for(var i=0; i<componente.length; i++){
+                                var currEl = componente[i]
+                    %>
+                            <div class="line">
+                                <div><%=currEl.nome%></div>
+                                <div><%=currEl.cognome%></div>
+                                <div><%=currEl.ruolo%></div>
+                                <div class="people_img"><img src="/images/upload/people/<%=currEl.foto%>" alt="img"/></div>
+                                <div class="removeButton">
+                                    <button class="editButton inline" title="edit banner">
+                                        <img src="/images/edit-icon.png" alt="edit"/>
+                                    </button>
+                                    <form class="async" id="removeComponent" class="inline" method="POST">
+                                        <input type="hidden" name="form-submitted" value="removeComponent"/>
+                                        <input type="hidden" name="component-id" value="<%=currEl._id%>"/>
+                                        <input type="hidden" name="idDatabase" value="<%=databaseID%>"/>
+                                        <button class="removeButton inline" title="Elimina banner">
+                                            <img src="/images/trash-icon.png" alt="edit"/>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="hide popup">
+                                <div class="close-button">
+                                    <img src="/images/close-button.png" alt="close"/>
+                                </div>
+                                <form class="async" ref='uploadForm' id='uploadForm' method='post' encType="multipart/form-data">
+                                    <fieldset>
+                                        <legend>Modifica componente:</legend>
+                                        
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="componente_nome">Nome</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" value="<%=currEl.nome%>" name="componente_nome" id="componente_nome"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="componente_cognome">Cognome</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" value="<%=currEl.cognome%>" name="componente_cognome" id="componente_cognome"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="componente_ruolo">Ruolo</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" value="<%=currEl.ruolo%>" name="componente_ruolo" id="componente_ruolo"/>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-input">
+                                                <div>
+                                                    <label for="componente_foto">Immagine</label>
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="sampleFile" id="componente_img"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+    
+                                        <input type="hidden" name="form-submitted" value="editComponent"/>
+                                        <input type="hidden" name="component-oldImg" value="<%=currEl.foto%>"/>
+                                        <input type="hidden" name="component-id" value="<%=currEl._id%>"/>
+                                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                        <input type="submit" value="Modifica"/>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            
+                    <%
+                            }
+                        }
+                        else{
+                    %>
+                            <b>---- Nessun componente inserito!! ----</b>
+                    <%
+                        }
+                    %>
+                </div>
+
+                <form ref='uploadForm' class="async" id='uploadForm' method='post' encType="multipart/form-data">
+                    <fieldset>
+                        <legend>Aggiungi componente:</legend>
+                        
+                        <div class="form-input">
+                            <div>
+                                <label for="componente_nome">Nome</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="componente_nome" id="componente_nome"/>
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <div>
+                                <label for="componente_cognome">Cognome</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="componente_cognome" id="componente_cognome"/>
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <div>
+                                <label for="componente_ruolo">Ruolo</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="componente_ruolo" id="componente_ruolo"/>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-input">
+                                <div>
+                                    <label for="componente_foto">Immagine</label>
+                                </div>
+                                <div>
+                                    <input type="file" name="sampleFile" id="componente_img"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="form-submitted" value="addComponent"/>
+                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                        <input type="submit" value="Aggiungi"/>
+                    </fieldset>
+                </form>
+            </div>
+            
+            <hr/>
+
+            <!-- SPONSORS -->
+            <h2 class="expand">SPONSORS</h2>
+
+            <div class="content sponsors sponsors-container">
+                <h3>Preview (lista)</h3>
+                <div class="tabella">
+                    <div class="header">
+                        <div>Url</div>
+                        <div>Foto</div>
+                        <div>Mostra su home</div>
+                        <div>Azioni</div>
+                    </div>
+                    <%
+                        var sponsors = database[0].sponsors
+                        if(sponsors.length){
+                            for(var i=0; i<sponsors.length; i++){
+                                var currEl = sponsors[i]
+                    %>
+                            <div class="line">
+                                <div><%=currEl.url%></div>
+                                <div><img src="/images/upload/sponsors/<%=currEl.foto%>" alt="img" class="sponsor"/></div>
+                                <div><%=currEl.mostraHome ? 'SI' : 'NO' %></div>
+                                <div class="removeButton">
+                                    <button class="editButton inline" title="edit banner">
+                                        <img src="/images/edit-icon.png" alt="edit"/>
+                                    </button>
+                                    <form class="async" id="removeSponsor" class="inline" method="POST">
+                                        <input type="hidden" name="form-submitted" value="removeSponsor"/>
+                                        <input type="hidden" name="sponsor-id" value="<%=currEl._id%>"/>
+                                        <input type="hidden" name="idDatabase" value="<%=databaseID%>"/>
+                                        <button class="removeButton inline" title="Elimina banner">
+                                            <img src="/images/trash-icon.png" alt="edit"/>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="hide popup">
+                                <div class="close-button">
+                                    <img src="/images/close-button.png" alt="close"/>
+                                </div>
+                                <form class="async" ref='uploadForm' id='uploadForm' method='post' encType="multipart/form-data">
+                                    <fieldset>
+                                        <legend>Modifica sponsor:</legend>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="sponsor_url">Url</label>
+                                            </div>
+                                            <div>
+                                                <input type="text" value="<%=currEl.url%>" name="sponsor_url" id="sponsor_url" placeholder="http://sito-sponsor.it"/>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-input">
+                                                <div>
+                                                    Immagine 
+                                                </div>
+                                                <div>
+                                                    <img src="/images/upload/sponsors/<%=currEl.foto%>" alt="img" class="sponsor"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-input">
+                                                <div>
+                                                    <label for="sponsor_img">Logo nuovo?</label>
+                                                </div>
+                                                <div>
+                                                    <input type="file" name="sampleFile" id="sponsor_img"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-input">
+                                                <div>
+                                                    <label for="sponsor_mostra_su_home">Mostra sulla home?</label>
+                                                </div>
+                                                <div>
+                                                    <input type="checkbox" value="si" <%=currEl.mostraHome ? 'checked' : '' %>  name="sponsor_mostra_su_home" id="sponsor_mostra_su_home"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" name="form-submitted" value="editSponsor"/>
+                                        <input type="hidden" name="sponsor-oldImg" value="<%=currEl.foto%>"/>
+                                        <input type="hidden" name="sponsor-id" value="<%=currEl._id%>"/>
+                                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                        <input type="submit" value="Modifica"/>
+                                    </fieldset>
+                                </form>
+                            </div>
+                    <%
+                            }
+                        }
+                        else{
+                    %>
+                            <b>---- Nessun componente inserito!! ----</b>
+                    <%
+                        }
+                    %>
+                </div>
+
+                <form class="async" ref='uploadForm' id='uploadForm' method='post' encType="multipart/form-data">
+                    <fieldset>
+                        <legend>Aggiungi sponsor:</legend>
+                        <div class="form-input">
+                            <div>
+                                <label for="sponsor_url">Url</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="sponsor_url" id="sponsor_url" placeholder="http://sito-sponsor.it"/>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-input">
+                                <div>
+                                    <label for="sponsor_img">Immagine</label>
+                                </div>
+                                <div>
+                                    <input type="file" name="sampleFile" id="sponsor_img"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-input">
+                                <div>
+                                    <label for="sponsor_mostra_su_home">Mostra sulla home?</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" value="si" name="sponsor_mostra_su_home" id="sponsor_mostra_su_home"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="form-submitted" value="addSponsor"/>
+                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                        <input type="submit" value="Aggiungi"/>
+                    </fieldset>
+                </form>
+            </div>
+            
+            <hr/>
+
+
+            <!-- Contributi -->
+            <h2 class="expand">CONTRIBUTI PUBBLICI</h2>
+
+            <div class="content news">
+                <%
+                    var contributi = database[0].contributi
+                    if(contributi && contributi.length){
+                        for(var i=0; i<contributi.length; i++){
+                            var currEl = contributi[i]
+                %>
+                        <div class="contributi-container clearfix">
+                            
+                            <div class="">
+                                <div class="descrizione">
+                                    <b>Ente</b>: <%-currEl.ente%>
+                                </div>
+                                <div class="descrizione">
+                                    <b>Descrizione</b>: <%-currEl.descrizione%>
+                                </div>
+                                <div class="descrizione">
+                                    <b>Legge</b>legge: <%-currEl.legge%>
+                                </div>
+                                <div class="descrizione">
+                                    <b>Contributi</b>contributi: <%-currEl.contributo%>
+                                </div>
+                            </div>
+                            <button class="editButton inline" title="edit banner">
+                                <img src="/images/edit-icon.png" alt="edit"/>
+                            </button>
+                            <div class="removeButton">
+                                <form class="async" id="removeContributo" class="inline" method="POST">
+                                    <input type="hidden" name="form-submitted" value="removeContributo"/>
+                                    <input type="hidden" name="contributo-id" value="<%=currEl._id%>"/>
+                                    <input type="hidden" name="idDatabase" value="<%=databaseID%>"/>
+                                    <button class="removeButton inline" title="Elimina banner">
+                                        <img src="/images/trash-icon.png" alt="edit"/>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+<!--
+                        <div class="hide popup">
+                            <div class="close-button">
+                                <img src="/images/close-button.png" alt="close"/>
+                            </div>
+                            <form ref='uploadForm' class="async" id='uploadForm' method='post' encType="multipart/form-data">
+                                <fieldset>
+                                    <legend>Modifica news:</legend>
+                                    
+                                    <div class="form-input">
+                                        <div>
+                                            <label for="news_titolo">Titolo</label>
+                                        </div>
+                                        <div>
+                                            <input type="text" value="<%=currEl.titolo%>" name="news_titolo" id="news_titolo"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="news_image">Nuova immagine</label>
+                                            </div>
+                                            <div>
+                                                <input type="file" name="sampleFile" id="news_img"/>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div>
+                                        <div class="form-input">
+                                            <div>
+                                                <label for="news_descrizione">Descrizione</label>
+                                            </div>
+                                            <div>
+                                                <textarea name="news_descrizione" id="news_descrizione"><%=currEl.descrizione%></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <input type="hidden" name="form-submitted" value="editNews"/>
+                                    <input type="hidden" name="news-oldImg" value="<%=currEl.foto%>"/>
+                                    <input type="hidden" name="news-id" value="<%=currEl._id%>"/>
+                                    <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                    <input type="submit" value="Modifica"/>
+                                </fieldset>
+                            </form>
+                        </div>
+-->
+                <%
+                        }
+                    }
+                    else{
+                %>
+                        <b>---- Nessun contributo inserito!! ----</b>
+                <%
+                    }
+                %>
+                
+                <form ref='uploadForm' class="async" id='uploadForm' method='post' encType="multipart/form-data">
+                    <fieldset>
+                        <legend>Aggiungi contributo:</legend>
+                        
+                        <div class="form-input">
+                            <div>
+                                <label for="contributo_ente">Ente</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="contributo_ente" id="contributo_ente"/>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-input">
+                                <div>
+                                    <label for="contributo_descrizione">Descrizione</label>
+                                </div>
+                                <div>
+                                    <textarea name="contributo_descrizione" id="contributo_descrizione"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-input">
+                            <div>
+                                <label for="contributo_legge">Rif. Legge</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="contributo_legge" id="contributo_legge"/>
+                            </div>
+                        </div>
+
+                        <div class="form-input">
+                            <div>
+                                <label for="contributo_euro">Contributo</label>
+                            </div>
+                            <div>
+                                <input type="text" value="€" name="contributo_euro" id="contributo_euro"/>
+                            </div>
+                        </div>
+
+                        <div class="form-input">
+                            <div>
+                                <label for="contributo_euro">Anno</label>
+                            </div>
+                            <div>
+                                <input type="text" value="" name="contributo_anno" id="contributo_anno"/>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" name="form-submitted" value="addContributo"/>
+                        <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                        <input type="submit" value="Aggiungi"/>
+                    </fieldset>
+                </form>
+            </div>
+            
+            <hr/>
+        </main>
+        
+        
+    </body>
+</html>

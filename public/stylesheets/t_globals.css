@@ -1,0 +1,557 @@
+/*
+COLORS
+- green: #148c4c 
+- new green: #167D39
+
+*/
+
+body {
+    font-family: sans-serif;
+    margin: 0px;
+}
+
+body.mobile .desktop-only,
+.mobile-only,
+.hide {
+    display: none;
+}
+
+h1 {
+    color: #167D39;
+    text-align: center;
+}
+
+hr {
+    border-color: #167D39;
+}
+
+/* GLOBAL RULES */
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.center {
+    text-align: center;
+}
+
+.space {
+    padding: 10px;
+}
+
+.space-lr {
+    padding: 10px 0px;
+}
+
+.space-tb {
+    padding: 10px 0px;
+}
+
+.header_container {
+    position: relative;
+}
+
+.screen60percent {
+    margin: auto 20%;
+}
+
+.close-menu img {
+    width: 35px;
+}
+
+.socials-floting {
+    background: #167D39;
+    border: 1px solid #FFF;
+    border-left: 0px;
+    border-radius: 0 20px 20px 0;
+    position: fixed;
+    left: 0;
+    top: 30%;
+    width: 60px;
+    z-index: 100;
+}
+
+.socials-floting > div {
+    padding: 10px 10px 10px 5px;
+    text-align: center;
+}
+
+.socials-floting img {
+    width: 40px;
+}
+
+.home-description {
+    color: #167D39;
+    font-size: 24px;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.mobile .home-description {
+    font-size: 20px;
+}
+/* END GLOBAL RULES */
+
+/* HEADER V3 */
+header.v3 .main-header {
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+    height: 75px;
+    justify-content: space-between;
+    padding-left: 300px !important;
+}
+
+header.v3 .main-header .team {
+    color: #167D39;
+    font-weight: bold;
+}
+
+header.v3 .logo {
+    left: 100px;
+    position: absolute;
+    top: 20px;
+    z-index: 100;
+}
+header.v3 .logo img.brand-logo {
+    height: 150px;
+}
+
+header.v3 .sponsors {
+    padding: 10px;
+}
+
+header.v3 .sponsors img {
+    max-height: 50px;
+}
+
+header.v3 .menu {
+    background: #167D39;
+    display: flex;
+    justify-content: left;
+    padding-left: 275px !important;
+    padding: 5px;
+}
+
+header.v3 .menu .category a,
+header.v3 .menu .category .category-name {
+    color: #FFF;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+/* END HEADER V3 */
+
+/* GENERIC */
+header .menu .category {
+    padding: 10px 25px;
+}
+
+.change-header-cont {
+    text-align: center;
+}
+
+
+header .menu .category:hover >  .subcategories {
+    display: block;
+}
+
+header .menu .subcategories {
+    background: #FFF;
+    border: 1px solid #167D39;
+    display: none;
+    margin-top: 10px;
+    min-width: 250px;
+    padding: 20px;
+    position: absolute;
+    z-index: 100;
+}
+
+
+header .menu .subcategories .subcategory:not(:last-of-type) {
+    padding-bottom: 20px;
+}
+
+header .menu .category a,
+header .menu .subcategories .subcategory a {
+    color: #167D39;
+    text-decoration: none;
+}
+
+footer a {
+    color: #FFF !important;
+}
+
+footer .footer-cont {
+    background: #167D39;
+    color: #FFF;
+    padding: 20px;
+    text-align: center;
+}
+
+footer .socials {
+    border-top: 5px solid #167D39;
+    color: #167D39;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+}
+
+footer .socials a {
+    text-decoration: none;
+}
+
+footer .socials img {
+    padding: 10px;
+    width: 20px;
+}
+
+footer .footer-categories {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+footer .footer-categories .subcategories div:not(:last-of-type) {
+    padding-bottom: 10px;
+}
+
+footer .sponsors-cont {
+    border-top: 5px solid #167D39;
+    padding: 20px 0px;
+}
+
+footer .sponsors-cont > .sponsors {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;;
+}
+
+footer .sponsors-cont > .sponsors div {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 130px;
+    padding: 10px;
+    width: 300px;
+}
+
+footer .sponsors-cont > .sponsors img {
+    max-height: 130px;;
+    max-width: 300px;
+}
+
+
+/* HOME */
+
+.main .slider {
+    border-bottom: 5px solid #167D39;
+    padding-bottom: 20px;
+}
+
+.main .instagram-widget {
+    border-top: 5px solid #167D39;
+    padding-top: 10px;
+}
+.main .instagram-widget .instalink,
+.main .instagram-widget .eapps-instagram-feed {
+    margin: 0 auto;
+}
+
+.video {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.video video {
+    max-width: 100%;
+}
+
+.partite {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 0px;
+    text-align: center;
+}
+
+.partite .partita-prev,
+.partite .partita-next {
+    font-size: 14px;
+    opacity: .7;
+    width: 25%;
+}
+
+.partite .partita-curr {
+    border-left: 5px solid #167D39;
+    border-right: 5px solid #167D39;
+    font-size: 20px;
+    width: 50%;
+}
+
+.partite .partita-prev .logo img,
+.partite .partita-next .logo img {
+        height: 100px;
+}
+
+.partite .partita-curr .logo img {
+    height: 200px;
+}
+
+.partite .data {
+    color: #167D39;
+    font-weight: bold;
+    padding: 10px 0px;
+    text-decoration: underline;
+}
+
+.partite .partita-prev .tipo-partita,
+.partite .partita-next .tipo-partita {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.partite .partita-curr .tipo-partita {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.partite .squadre {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0px;
+}
+
+.partite .squadre .asdt {
+    color: #167D39;
+    font-weight: bold;
+}
+
+.partite .squadre > div {
+    max-width: 50%;
+}
+
+.classifica-iframe {
+    min-height: 750px;
+}
+
+/* ROSA */
+.giocatori {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.giocatori .giocatore {
+    text-align: center;
+    padding: 20px 5%;
+    width: 15%;
+}
+.giocatori .giocatore .gioc_info {
+    background: #167D39;
+    border: 3px solid #167D39;
+    border-radius: 20px 20px 0 0 ;
+    color: #FFF;
+    overflow: hidden;
+}
+
+.giocatori .giocatore .gioc_info .foto {
+    border-bottom: 5px solid #167D39;
+}
+.giocatori .giocatore .gioc_info .foto img {
+    width: 100%;
+}
+
+
+.giocatori .giocatore .gioc_info .nome,
+.giocatori .giocatore .gioc_info .ruolo,
+.giocatori .giocatore .gioc_info .preseneze,
+.giocatori .giocatore .gioc_info .gol {
+    padding: 10px;
+}
+
+.giocatori .giocatore .gioc_info .nome {
+    font-weight: bold;
+}
+
+h2.ruoli {
+    text-align: center;
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+
+/* NEWS */
+.news-container {
+    border: 3px solid #167D39;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.news-container .foto {
+    float: left;
+    width: 25%;
+}
+
+.news-container .foto img {
+    max-width: 100%;
+}
+
+.news-container .news-content {
+    float: left;
+    width: 75%;
+}
+
+.news-container .news-content h2 {
+    padding: 0px 10px;
+}
+
+.news-container .news-content .descrizione {
+    padding: 0px 10px;
+}
+
+.news-container .news-content .descrizione a {
+    color: #167D39;
+}
+
+.news-container .audio {
+    padding: 20px 0;
+    text-align: center;
+}
+
+body.mobile .news-container .audio audio {
+    width: 100%;
+}
+
+/* PARTITE */
+.risultati {
+    margin: 25px 0px;
+}
+
+.risultati .headers {
+    padding: 5px 0px;
+    border-bottom: 3px solid #167D39;
+}
+
+.risultati .righe:not(:last-of-type) {
+    border-bottom: 1px solid #167D39;
+}
+.risultati .righe {
+    padding: 20px 0px;
+}
+
+.risultati .headers .data,
+.risultati .headers .partita,
+.risultati .headers .risultato {
+    color: #167D39;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.risultati .headers .data,
+.risultati .righe .data {
+    float: left;
+    text-align: center;
+    width: 25%;
+}
+
+.risultati .headers .partita,
+.risultati .righe .partita {
+    float: left;
+    text-align: center;
+    width: 50%;
+}
+
+.risultati .headers .risultato,
+.risultati .righe .risultato {
+    float: left;
+    text-align: center;
+    width: 25%;
+}
+
+/* SPONSORS */
+
+.sponsors-page {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;;
+}
+
+.sponsors-page > div {
+    align-items: center;
+    border: 1px solid #167D39;
+    display: flex;
+    height: 120px;
+    justify-content: center;
+    margin: 3px 0px;
+    padding: 5px;
+    width: 250px;
+}
+
+.sponsors-page img {
+    max-height: 120px;
+    max-width: 250px;
+}
+
+/* ORGANIGRAMMA */
+
+.organigramma {
+    margin: 25px 0px;
+}
+
+.organigramma .riga {
+    align-items: center;
+    border-bottom: 2px solid #167D39;
+    display: flex;
+    font-weight: bold;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.organigramma .riga .foto img {
+    max-height: 150px;
+}
+
+/* CONTATTI */
+
+.contatti {
+    text-align: center;
+}
+
+.contatti a {
+    color: #167D39;
+}
+
+/* DIVISE */
+
+.divise img {
+    width: 100%;
+}
+
+/* CONTRIBUTI */
+
+.contributi-space {
+    padding: 10px;
+}
+
+.contributi-container {
+    border: 3px solid #167D39;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.contributi-container .el-line {
+    padding: 5px;
+}

@@ -1,0 +1,36 @@
+<title>ASD TAGLIAMENTO - <%=title%></title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<%
+    var robots = env == 'production' ? 'INDEX,FOLLOW'  : 'noindex'
+    var description = env == 'production' ? 'ASD TAGLIAMENTO'  : ''
+    var keywords = env == 'production' ? 'ASD TAGLIAMENTO,dignano,calcio,figc,tagliamento'  : ''
+%>
+
+<meta name="description" content="<%=description%>">
+<meta name="keywords" content="<%=keywords%>">
+
+
+<meta name="robots" content="<%=robots%>"></meta>
+<meta name="googlebot" content="<%=robots%>"></meta>
+
+<link rel="icon" href="/images/logo_asd_tagliamento_final.png"></link>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<link type="text/css" href="/stylesheets/t_globals.css" rel="stylesheet"/>
+<link type="text/css" href="/stylesheets/t_globals-mobile.css" rel="stylesheet"/>
+
+<link type="text/css" href="/stylesheets/carousel.css" rel="stylesheet"/>
+<script src="/javascripts/t_globals.js"></script>
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NP79F8PKBB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-NP79F8PKBB');
+</script>

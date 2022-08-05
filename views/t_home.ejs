@@ -1,0 +1,133 @@
+<section class="main">
+    <div class="slideshow-container desktop">
+        <%
+            var homeCarousel = database[0].homeCarousel
+
+            if(homeCarousel.length){
+                var counter = 0
+                for(var i=homeCarousel.length-1; i>-1; i--){
+                    var currEl = homeCarousel[i],
+                        counter = counter+1
+        %>
+                <div class="mySlides fade">
+                    <div class="numbertext"><%=counter%> / <%=homeCarousel.length%></div>
+                    <img src="/images/upload/home/<%=currEl.foto%>" style="width:100%">
+                    <!--<div class="text"></div>-->
+                </div>
+        <%
+                }
+            }
+        %>
+        
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    
+    </div>
+    <hr/>
+    <div class="slideshow-container mobile">
+        <%
+            var homeCarousel = database[0].homeCarouselMobile
+
+            if(homeCarousel.length){
+                var counter = 0
+                for(var i=homeCarousel.length-1; i>-1; i--){
+                    var currEl = homeCarousel[i],
+                        counter = counter+1,
+                        foto = (currEl.fotoMobile && currEl.fotoMobile != 'no-mobile-version') ? currEl.fotoMobile : currEl.foto
+
+        %>
+                <div class="mySlides fade">
+                    <div class="numbertext"><%=counter%> / <%=homeCarousel.length%></div>
+                    <img src="/images/upload/home/<%=foto%>" style="width:100%">
+                    <!--<div class="text"></div>-->
+                </div>
+        <%
+                }
+            }
+        %>
+        
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    
+    </div>
+    <div class="home-description">
+        ASD Tagliamento squadra dilettantistica di Dignano dal 1970. 
+        <br/>
+        Lo sport, il calcio e i colori biancoverdi sono le nostre passioni.
+    </div>
+
+    <hr/>
+
+    <div class="video">
+        <video autoplay muted controls loop id="homeVideo" poster="/images/video-home-poster.png">
+            <source src="/videos/video-home.mp4" type="video/mp4">
+          </video>
+    </div>
+
+    <hr/>
+    
+    <div class="screen60percent">
+
+        <div>
+            <!-- risultati -->
+            <iframe src='https://www.tuttocampo.it/WidgetV2/Risultati/356cf3a3-0a5a-4c00-9b79-fd3297b0280d' width='100%' height='600' scrolling='no' frameborder='0'></iframe>
+            
+            <!-- classifica -->
+            <!--
+            <iframe src='https://www.tuttocampo.it/WidgetV2/Classifica/356cf3a3-0a5a-4c00-9b79-fd3297b0280d' width='100%' height='100%' scrolling='no' frameborder='0' class="classifica-iframe"></iframe>
+            -->
+        </div>
+    </div>
+    <%
+        if(env == 'production'){
+    %>
+        <div class="instagram-widget">
+            <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+            <div class="elfsight-app-e335d249-97ed-4011-9270-6114b8a1f88c"></div>
+        </div>
+    <%
+        }else {
+    %>
+        <div class="instagram-widget center space">
+            INSTAGRAM WIDGET ONLY ON asdtagliemento.it
+        </div>
+    <%
+        }
+    %>
+</section>
+
+<footer>
+    <div class="sponsors-cont">
+        <div class="sponsors screen60percent">
+            <%
+                var sponsors = database[0].sponsors
+                if(sponsors.length){
+                    for(var i=0; i<sponsors.length; i++){
+                        var currEl = sponsors[i]
+                        if(currEl.mostraHome) {
+            %>
+                            <div>
+                                <%
+                                    if(currEl.url){
+                                
+                                %>
+                                        <a href="<%=currEl.url%>" target="_blank">
+                                            <img src="/images/upload/sponsors/<%=currEl.foto%>" alt="sponsor">
+                                        </a>
+                                <%
+                                    }else{
+                                %>
+                                        <img src="/images/upload/sponsors/<%=currEl.foto%>" alt="sponsor">
+                                <%
+                                    }
+                                %>
+                                
+                            </div>
+            <%
+                        }
+                    }
+                }
+            %>
+        </div>
+    </div>
+</footer>

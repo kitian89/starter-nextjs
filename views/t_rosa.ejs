@@ -1,0 +1,81 @@
+<%
+    var giocatori = {
+        'portieri': [],
+        'difensori': [],
+        'centrocampisti': [],
+        'attaccanti': []
+    }
+    var giocatoriDB = database[0].rosa.sort((a, b) => a.cognome > b.cognome && 1 || -1)
+
+    if(giocatoriDB.length){
+        for(var i=0; i<giocatoriDB.length; i++){
+            var currGioc = giocatoriDB[i],
+                ruolo = ''
+            if(currGioc.ruolo == 'Portiere'){
+                ruolo = 'portieri'
+            }else if(currGioc.ruolo == 'Difensore'){
+                ruolo = 'difensori'
+            }else if(currGioc.ruolo == 'Centrocampista'){
+                ruolo = 'centrocampisti'
+            }else if(currGioc.ruolo == 'Attaccante'){
+                ruolo = 'attaccanti'
+            }
+
+            if(ruolo != ''){
+                giocatori[ruolo].push({
+                    nome: currGioc.nome,
+                    cognome: currGioc.cognome,
+                    foto: currGioc.foto
+                })
+            }
+        }
+    }
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+    <head>
+        <%- include('../views/t_head.ejs') %>
+    </head>
+    <body>
+        <%- include('../views/t_header.ejs') %>
+
+        <h1>
+            Rosa
+        </h1>
+
+        <%
+        
+            for (var key in giocatori) {
+                var obj = giocatori[key];
+        %>
+            <hr/>
+            <h2 class="ruoli">
+                <%=key%>
+            </h2>
+            <div class="giocatori">
+            <%
+                for (var prop in obj) {
+            %>
+                <div class="giocatore">
+                    <div class="gioc_info">
+                        <div class="foto">
+                            <img src="/images/upload/people/<%=obj[prop].foto%>" src="giocatore"/>
+                        </div>
+                        <div class="nome">
+                            <%=obj[prop].nome%> <%=obj[prop].cognome %>
+                        </div>
+                    </div>
+                </div>
+            <%
+                }
+            %>
+            </div>
+        <%
+            }
+        %>
+            
+        </div>
+        <%- include('../views/t_footer.ejs') %>
+    </body>
+</html>

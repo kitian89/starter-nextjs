@@ -1,0 +1,212 @@
+body.mobile .change-header-cont {
+    display: none;
+}
+body.mobile .mobile-only {
+    display: block;
+}
+
+body.mobile .screen60percent {
+    margin: 0;
+}
+
+body.mobile .header_container {
+    border-bottom: 1px solid #167D39;
+}
+
+body.mobile header .main-header {
+    padding-bottom: 10px;
+}
+
+body.mobile header .logo {
+    left: 10px;
+    padding: 10px;
+    top: 0;
+}
+
+
+body.mobile header .logo img.brand-logo {
+    height: 75px;
+}
+
+body.mobile header .main-header {
+    padding-left: 100px !important;
+    padding-top: 10px;
+}
+
+body.mobile .mobile-menu {
+    color: #FFF;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 25px 10px 10px 10px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    width: 30px;
+}
+
+body.mobile .mobile-menu .line {
+    background: #167D39;
+    border-radius: 5px;
+    height: 5px;
+    margin: 5px 0;
+    width: 30px;
+}
+
+body.mobile .menu-overlay:not(.open) {
+    display: none;
+}
+body.mobile .menu-overlay.open {
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    height: 1500;
+    top: -100px;
+    left: 0;
+    opacity: .5;
+    pointer-events: none;
+    z-index: 999;
+}
+
+body.mobile header .menu {
+    display: none;
+}
+
+body.mobile header .open + .menu {
+    display: block;
+    left: 0;
+    padding: 0px !important;
+    position: absolute;
+    touch-action: none;
+    width: 100%;
+    z-index: 1000;
+}
+
+body.mobile header .menu .category a,
+body.mobile header .menu .category .category-name {
+    font-size: 20px;
+}
+
+body.mobile header .menu .subcategories {
+    background: #167D39;
+    display: block;
+    padding: 0 20px;
+    position: relative;
+}
+
+body.mobile header .menu .category a,
+body.mobile header .menu .subcategories .subcategory a {
+    color: #FFF;
+}
+
+body.mobile header .menu .close-menu {
+    position: absolute;
+    right: 20px;
+}
+
+body.mobile footer .socials img {
+    width: 30px;
+}
+
+body.mobile .socials-floting {
+    bottom: 0 !important;;
+    height: 60px;
+    border: 1px solid #FFF;
+    border-bottom: 0;
+    border-radius: 20px 20px 0px 0;
+    display: flex;
+    justify-content: space-around;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    top: auto;
+    width: 75%;
+}
+
+body.mobile .socials-floting img {
+    width: 40px;
+}
+
+body.mobile .partite .partita-prev,
+body.mobile .partite .partita-next {
+    display: none;
+}
+
+body.mobile .partite .partita-curr {
+    border: 0px;
+    font-size: 16px;
+    width: 100%;
+}
+
+body.mobile .partite .partita-curr .logo img {
+    height: 150px;
+}
+
+body.mobile footer .footer-cont {
+    padding-bottom: 100px;
+}
+
+body.mobile footer .sponsors div {
+    padding: 5px;
+    border: 3px solid #167D39;
+    margin: 3px;
+}
+
+body.mobile footer .sponsors img {
+    width: 100%;
+}
+
+body.mobile footer .footer-categories {
+    flex-direction: column;
+}
+
+body.mobile footer .footer-categories h3 {
+    font-size: 24px;
+}
+
+body.mobile footer .footer-categories .subcategories {
+    font-size: 20px;
+}
+
+body.mobile footer .sponsors-cont {
+    padding: 20px;
+}
+
+/* NEWS */
+body.mobile .news-container {
+    margin: 10px;
+}
+
+body.mobile .news-container .foto,
+body.mobile .news-container .news-content {
+    float: none;
+    width: 100%;
+}
+
+/* ROSA */
+
+body.mobile .giocatori .giocatore {
+    width: 100%;
+}
+
+body.mobile .giocatori .giocatore .gioc_info .nome {
+    font-size: 22px;
+}
+
+body.mobile .giocatori .giocatore .gioc_info {
+    font-size: 16px;
+}
+
+/* ORGANIGRAMMA */
+body.mobile .organigramma .riga {
+    display: block;
+    text-align: center;
+}
+
+body.mobile .organigramma .riga > div {
+    padding: 10px;
+}
+
+body.mobile .organigramma .riga .foto img {
+    max-height: unset;
+    width: 50%;
+}

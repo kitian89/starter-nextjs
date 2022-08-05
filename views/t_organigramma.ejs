@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+    <head>
+        <%- include('../views/t_head.ejs') %>
+    </head>
+    <body>
+        <%- include('../views/t_header.ejs') %>
+
+        <h1>
+            Organigramma
+        </h1>
+        <hr/>
+
+        <div class="screen60percent">
+            <div class="organigramma">
+                <%
+                    var organigramma = database[0].organigramma
+                    if(organigramma.length){
+                        for(var i=0; i<organigramma.length; i++){
+                            var currEl = organigramma[i]
+                %>
+                            <div class="riga">
+                                <div class="nome">
+                                    <%=currEl.cognome%> <%=currEl.nome%>
+                                </div>
+                                <div class="ruolo">
+                                    <%=currEl.ruolo%>
+                                </div>
+                                <div class="foto">
+                                    <img src="/images/upload/people/<%=currEl.foto%>" src="giocatore"/>
+                                </div>
+                            </div>
+                <%
+                        }
+                    }
+                %>
+            </div>
+        </div>
+            
+        <%- include('../views/t_footer.ejs') %>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+    <head>
+        <%- include('../views/t_head.ejs') %>
+    </head>
+    <body>
+        <%- include('../views/t_header.ejs') %>
+
+        <h1>
+            Contributi Pubblici
+        </h1>
+        <hr/>
+
+        <div class="screen60percent">
+            <%
+                var contributi = database[0].contributi,
+                    thisYear = new Date().getFullYear(),
+                    startYear = 2022
+                if(contributi && contributi.length){
+
+                    for(var j = startYear; j<=thisYear; j++) {
+
+
+            %>
+            <div class="contributi-space">
+                <h2><%=j%></h2>
+            <%
+                        for(var i=contributi.length-1; i>=0; i--){
+                            var currEl = contributi[i]
+                            if(j == parseInt(currEl.anno)){
+                               
+                        
+            %>
+                        <div class="contributi-container clearfix">
+                            <div>
+                                <div class="el-line">
+                                    <b>Ente</b>: <%=currEl.ente%>
+                                </div>
+                                <div class="el-line">
+                                    <b>Descrizione</b>: <%=currEl.descrizione%>
+                                </div>
+                                <div class="el-line">
+                                    <b>Legge</b>: <%=currEl.legge%>
+                                </div>
+                                <div class="el-line">
+                                    <b>Contributi</b>: <%=currEl.contributo%>
+                                </div>
+                            </div>
+                        </div>
+            <%
+                            }
+                        }
+                    }
+                }
+            %>
+            </div>
+        </div>
+
+        <%- include('../views/t_footer.ejs') %>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+    <head>
+        <%- include('../views/t_head.ejs') %>
+    </head>
+    <body>
+        <%- include('../views/t_header.ejs') %>
+
+        <h1>
+            News
+        </h1>
+        <hr/>
+            
+        <div class="screen60percent">
+            <%
+                var news = database[0].news
+                if(news.length){
+                    for(var i=news.length-1; i>=0; i--){
+                        var currEl = news[i]
+                        
+            %>
+                        <div class="news-container clearfix">
+                            <div class="foto">
+                                <img src="/images/upload/news/<%=currEl.foto%>" alt=""/> 
+                            </div>
+                            <div class="news-content">
+                                <h2><%=currEl.titolo%></h2>
+                                <div class="descrizione">
+                                    <%-currEl.descrizione%>
+                                </div>
+                            </div>
+                        </div>
+            <%
+                    }
+                }
+            %>
+        </div>
+        <%- include('../views/t_footer.ejs') %>
+    </body>
+</html>
