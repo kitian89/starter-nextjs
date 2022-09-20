@@ -268,7 +268,8 @@ footer .sponsors-cont > .sponsors img {
     padding-top: 20px;
 }
 
-.video video {
+.video video,
+.video iframe {
     max-width: 100%;
 }
 
