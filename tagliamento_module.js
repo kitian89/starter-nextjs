@@ -1,9 +1,12 @@
 var mongoose = require('mongoose');
+var BluebirdPromise = require('bluebird').Promise;
+
 console.log('mongoose looded')
 mongoose.connect('mongodb+srv://asdtagliamento:Taglia1970@cluster0.gp2m3ft.mongodb.net/?retryWrites=true&w=majority',
 {
     useNewUrlParser: true, 
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    promiseLibrary: BluebirdPromise
   }
 );
 
