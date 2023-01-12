@@ -1,17 +1,12 @@
 var mongoose = require('mongoose');
 console.log('mongoose looded')
 
-try {
-    mongoose.connect('mongodb+srv://asdtagliamento:Taglia1970@cluster0.gp2m3ft.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://asdtagliamento:Taglia1970@cluster0.gp2m3ft.mongodb.net/?retryWrites=true&w=majority',
     {
         useNewUrlParser: true, 
         useUnifiedTopology: true
-      }
-    );
-}catch(e){
-    console.log(e)
-}
-
+    }
+);
 
 var Schema = mongoose.Schema;
 

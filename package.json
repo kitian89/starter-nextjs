@@ -1,32 +1,20 @@
 {
-  "name": "nextjs-hello-world",
-  "version": "0.1.0",
-  "main": "app.js",
+  "name": "project-retail",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "postinstall": "next build"
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "next": "11.1.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
     "cloudnode-cli": "^0.2.23",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "ejs": "^3.1.8",
-    "express": "^4.18.1",
+    "ejs": "^2.6.2",
+    "express": "~4.16.1",
     "express-fileupload": "^1.2.0",
     "http-errors": "~1.6.3",
-    "mongodb": "^3.5.7",
-    "mongoose": "^6.5.1",
+    "mongoose": "^5.9.14",
     "morgan": "~1.9.1",
     "multiparty": "^4.2.2"
-  },
-  "devDependencies": {
-    "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2"
   }
 }
