@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 console.log('mongoose looded')
-
 mongoose.connect('mongodb+srv://asdtagliamento:Taglia1970@cluster0.gp2m3ft.mongodb.net/?retryWrites=true&w=majority',
     {
         useNewUrlParser: true, 
         useUnifiedTopology: true
-    }
+      }
 );
 
 var Schema = mongoose.Schema;
