@@ -1,9 +1,13 @@
 {
-  "name": "project-retail",
-  "version": "0.0.0",
-  "private": true,
+  "name": "nextjs-hello-world",
+  "version": "0.1.0",
+  "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "next build"
   },
   "dependencies": {
     "cloudnode-cli": "^0.2.23",
