@@ -542,6 +542,168 @@ app.get('/', function(req, res) {
         }
     }
 })
+.get('/cc_classifica', function(req, res){
+    var host = req.hostname,
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'staging' : 'staging',
+        pageUrl = req.url,
+        database = require('./tagliamento_module')
+
+    if(env == 'staging'){
+        res.setHeader('X-Robots-Tag', 'noindex');
+    }
+
+    database.find({}, (err, data) => {
+        if (err){ throw err};
+        res.render('t_cc_classifica', {database: data, title: 'Coppa Chiosco Classifica', env: env, host: host, pageUrl: pageUrl})
+    });
+})
+.get('/cc_gestione', function(req, res){
+    var host = req.hostname,
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'staging' : 'staging',
+        pageUrl = req.url,
+        database = require('./tagliamento_module')
+
+    if(env == 'staging'){
+        res.setHeader('X-Robots-Tag', 'noindex');
+    }
+
+    database.find({}, (err, data) => {
+        if (err){ throw err};
+        res.render('t_cc_gestione', {database: data, title: 'Coppa Chiosco Admin', env: env, host: host, pageUrl: pageUrl})
+    });
+
+})
+.get('/cc_classifica_script', function(req, res){
+    var host = req.hostname,
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'staging' : 'staging',
+        pageUrl = req.url,
+        database = require('./tagliamento_module')
+
+    if(env == 'staging'){
+        res.setHeader('X-Robots-Tag', 'noindex');
+    }
+
+    database.find({}, (err, data) => {
+        if (err){ throw err};
+        res.render('t_cc_classifica_script', {database: data, title: 'Coppa Chiosco script', env: env, host: host, pageUrl: pageUrl})
+    });
+
+})
+
+
+
+
+
+
+
+
+.post('/cc_gestione', function(req, res){
+    var host = req.hostname,
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'staging' : 'staging',
+        pageUrl = req.url,
+        database = require('./tagliamento_module'),
+        params = req.body
+
+    res.setHeader('X-Robots-Tag', 'noindex');
+
+    console.log('form-submitted: ' + params['form-submitted'])
+
+    if(params['form-submitted']){
+
+        var toPush = {},
+            toPull  = {},
+            elToSet = {},
+            toSet = {},
+            action = ''
+
+        switch(params['form-submitted']) {
+        
+        // -------------------------- ADD ----------------------------------------
+            case 'addTeam':
+                action = 'add'
+                toPush = {
+                    coppaChiosco: {
+                        nome: params.name,
+                        qty: params.qty
+                    }
+                }
+                break;
+        // -------------------------- REMOVE ----------------------------------------
+            
+            case 'removeTeam':
+                action = 'remove'
+                toPull = {"$pull": {'coppaChiosco': { '_id': params['coppaChiosco-id']} }}
+                break;
+
+        // -------------------------- UPDATE ----------------------------------------
+            case 'editTeam':
+                action = 'update'
+                elToSet = {
+                    _id: params['databaseID'],
+                    'coppaChiosco._id': params['coppaChiosco-id']
+                }
+                toSet = {
+                    "$set": {
+                        'coppaChiosco.$.nome': params['name'], 
+                        'coppaChiosco.$.qty': params['qty'],
+                    }
+                }
+                break;
+        // DEFAULT NO MATCH
+            default:
+              console.log(`No match`);
+        }
+
+
+        if(action == 'add'){
+            console.log('action ADD')
+            var dbId = params.databaseID
+            
+            database.findOneAndUpdate(
+                {_id: dbId},
+                {"$push": toPush},
+                {new: true},
+                function(err) {
+                    if (err) throw err;
+                    console.log('add completato');
+    
+                    database.find({}, (err, data) => {
+                        if (err){ throw err};
+                        console.log('render')
+                        console.log(data)
+                        res.render('t_cc_gestione.ejs', {database: data, title: 'Coppa Chiosco Admin', env: env, host: host, pageUrl: pageUrl})
+                    });
+                }
+            )
+        }else if(action == 'remove'){
+            database.findOneAndUpdate({_id: params['idDatabase']}, toPull, function(err) {
+                if (err) throw err;
+                console.log('Delete completato');
+    
+                database.find({}, (err, data) => {
+                    if (err){ throw err};
+                    console.log('render')
+                    console.log(data)
+                    res.render('t_cc_gestione.ejs', {database: data, title: 'Coppa Chiosco Admin', env: env, host: host, pageUrl: pageUrl})
+                });    
+            })
+        }else if(action == 'update'){  
+            console.log('update')          
+
+            database.findOneAndUpdate(elToSet, toSet, function(err) {
+                if (err) throw err;
+                console.log('update completato');
+
+                database.find({}, (err, data) => {
+                    if (err){ throw err};
+                    console.log('render')
+                    console.log(data)
+                    res.render('t_cc_gestione.ejs', {database: data, title: 'Coppa Chiosco Admin', env: env, host: host, pageUrl: pageUrl})
+                });           
+            })
+        }
+    }
+})
 /*
     NOT FOUND!!!!
 */
