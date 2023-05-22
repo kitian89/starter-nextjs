@@ -544,7 +544,7 @@ app.get('/', function(req, res) {
 })
 .get('/cc_classifica', function(req, res){
     var host = req.hostname,
-        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'staging' : 'staging',
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'production' : 'staging',
         pageUrl = req.url,
         database = require('./tagliamento_module')
 
@@ -559,7 +559,7 @@ app.get('/', function(req, res) {
 })
 .get('/cc_gestione', function(req, res){
     var host = req.hostname,
-        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'staging' : 'staging',
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'production' : 'staging',
         pageUrl = req.url,
         database = require('./tagliamento_module')
 
@@ -575,7 +575,7 @@ app.get('/', function(req, res) {
 })
 .get('/cc_classifica_script', function(req, res){
     var host = req.hostname,
-        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'staging' : 'staging',
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'production' : 'staging',
         pageUrl = req.url,
         database = require('./tagliamento_module')
 
@@ -599,7 +599,7 @@ app.get('/', function(req, res) {
 
 .post('/cc_gestione', function(req, res){
     var host = req.hostname,
-        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'staging' : 'staging',
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'production' : 'staging',
         pageUrl = req.url,
         database = require('./tagliamento_module'),
         params = req.body
