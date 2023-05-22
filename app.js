@@ -582,10 +582,10 @@ app.get('/', function(req, res) {
     if(env == 'staging'){
         res.setHeader('X-Robots-Tag', 'noindex');
     }
-console.log("database")
-    console.log(database)
     database.find({}, (err, data) => {
         if (err){ throw err};
+        console.log(data)
+        console.log(JSON.stringify(data))
         res.render('t_cc_classifica_script', {database: data, title: 'Coppa Chiosco script', env: env, host: host, pageUrl: pageUrl})
     });
 
