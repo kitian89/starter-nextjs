@@ -12,14 +12,17 @@
 <br/>
 ----
 <br/>
-<%=database[0].coppaChiosco%>
+1<%=database[0].coppaChiosco%>
 <br/>
 ----
 <br/>
-<%=database.coppaChiosco%>
+2<%=database.coppaChiosco%>
 <br/>
 ----
 <br/>
+3<%=database[0]['coppaChiosco']%>
+<br/>
+
 <%
     var classifica = database[0].coppaChiosco
     if(classifica){
