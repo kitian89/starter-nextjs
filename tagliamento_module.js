@@ -44,6 +44,11 @@ var contributoSchema = new Schema ({
     anno: String
 })
 
+var coppaChiosco = new Schema ({
+    nome: String,
+    qty: String
+})
+
 
 var databaseSchema = new Schema({
     homeCarousel: [mainCarouselSchema],
@@ -52,7 +57,8 @@ var databaseSchema = new Schema({
     rosa: [personaSchema],
     organigramma: [personaSchema],
     sponsors: [sponsorsSchema],
-    contributi: [contributoSchema]
+    contributi: [contributoSchema],
+    coppaChiosco: [coppaChiosco]
 });
 
 var database = mongoose.model('database', databaseSchema);
