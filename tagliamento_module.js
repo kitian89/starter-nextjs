@@ -46,9 +46,8 @@ var contributoSchema = new Schema ({
 
 var coppaChiosco = new Schema ({
     nome: String,
-    qty: String
+    qty: Number
 })
-
 
 var databaseSchema = new Schema({
     homeCarousel: [mainCarouselSchema],
