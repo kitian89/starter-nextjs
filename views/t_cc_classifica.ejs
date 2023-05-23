@@ -48,9 +48,14 @@
                 background-image: url(/images/beer.gif);
                 background-size: cover;
                 height: 100vh;
+                padding: 20px 0;
             }
             h1 {
-                margin-top: 50px;
+                margin: 20px;
+            }
+
+            hr {
+                margin: 0;
             }
 
             .coppa-chiosco {
@@ -64,8 +69,7 @@
                 font-weight: bold;
                 padding: 10px;
                 margin: 10px 0;
-                border-top: 1px solid #999;
-                border-bottom: 1px solid #999;
+                border: 5px solid #000;
                 position: absolute;
                 width: 100%;
                 transition: top 2000ms;
@@ -75,7 +79,6 @@
             .coppa-chiosco .team.pos-1 {
                 background-color: gold;
                 font-size: 60px;
-                border: 0;
                 top: 0;
                 z-index: 7;
             }
@@ -83,7 +86,6 @@
             .coppa-chiosco .team.pos-2 {
                 background-color: silver;
                 font-size: 50px;
-                border: 0;
                 top: 150px;
                 z-index: 6;
             }
@@ -91,7 +93,6 @@
             .coppa-chiosco .team.pos-3 {
                 background-color: #cd7f32;
                 font-size: 40px;
-                border: 0;
                 top: 275px;
                 z-index: 5;
             }
@@ -163,10 +164,10 @@
             
 
             function aggiornaClassifica(){
-                console.log(nuovaClassifica)
+                //console.log(nuovaClassifica)
                 for(var i=0;i<nuovaClassifica.length;i++){
                     var that = nuovaClassifica[i]
-                    console.log(that.punti)
+                    //console.log(that.punti)
                     $('#' + that.id).find('.qty').html(that.punti)
                 }
 
@@ -176,7 +177,7 @@
                 for(var i=0;i<nuovaClassifica.length;i++){
                     var that = nuovaClassifica[i],
                         thatEl = $('#' + that.id)
-                    console.log(that.punti)
+                    //console.log(that.punti)
                     if(i != (parseInt(thatEl.attr('pos'))-1)){
                         var newPos = i+1
                         thatEl.removeClass('pos-' + thatEl.attr('pos'))
