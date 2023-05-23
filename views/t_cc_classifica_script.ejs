@@ -1,31 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
-    <head>
-        <%- include('../views/t_head.ejs') %>
-    </head>
-    <body>
-        <%- include('../views/t_header.ejs') %>
-
-
-
-        <%=database[0]%>
-<br/>
-----
-<br/>
-1<%=database[0].coppaChiosco%>
-<br/>
-----
-<br/>
-2<%=database.coppaChiosco%>
-<br/>
-----
-<br/>
-3<%=database[0]['coppaChiosco']%>
-<br/>
 
 <%
     var classifica = database[0].coppaChiosco
-    if(classifica){
+
     classifica.sort((a,b) =>  a.qty - b.qty )
 %>
 <script class="nuovaClassifica">
@@ -42,17 +18,6 @@
         
     <%
         }
-}
     %>
 </script>
-
-
-
-
-
-
-        <%- include('../views/t_footer.ejs') %>
-    </body>
-</html>
-
     
