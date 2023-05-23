@@ -4,273 +4,58 @@
         <% include ../views/t_head.ejs %>
     </head>
     <body>
+        <% include ../views/t_header.ejs %>
+
         <h1>
-            Coppa Chiosco Admin
+            Contributi Pubblici
         </h1>
         <hr/>
 
-        <% 
-            var cc = database[0].coppaChiosco
-            var databaseID = database[0].id
-        %>
-
-        <%
-            if(cc.length){
-
-        %>
         <div class="screen60percent">
+            <%
+                var contributi = database[0].contributi,
+                    thisYear = new Date().getFullYear(),
+                    startYear = 2022
+                if(contributi && contributi.length){
 
-            <div class="aggiungi-birre-container">   
-                
-                <div class="aggiungi-birre headings">
-                    <div class="squadra">
-                        SQUADRA
-                    </div>
-                    <div class="birre">
-                        NUMERO BIRRE
-                    </div>
-                    <div class="submit">
-
-                    </div>
-                </div>
-                <% 
-                    for (var i=0; i<cc.length; i++){
-                %>
-                    <form class="async" ref='uploadForm' id='uploadForm' method='post'>
-                        <div class="aggiungi-birre">
-                            <div class="squadra">
-                                <span  class="teams"><%=cc[i].nome%></span>
-                            </div>
-
-                            <div class="birre">
-                                <%
-                                    for(var j=1; j<10; j++){
-
-                                        var qtyTot = cc[i].qty + j
-                                %>
-                                    <label>
-                                        <input type="radio" name="qty" value="<%=qtyTot%>"/>  <span  class="quantita"><%=j%></span>
-                                    </label>
-                                <%
-                                    }
-                                %>
-                                <label>
-                                    <%
-                                        var qtyAbb = cc[i].qty + 11
-                                    %>
-                                    <input type="radio" name="qty" value="<%=qtyAbb%>"/>  <span  class="quantita">Abbonamento</span>
-                                </label>
-                            </div>
-
-                            <div class="submit">
-                                <input type="hidden" name="name" value="<%=cc[i].nome%>"/>
-                                <input type="hidden" name="form-submitted" value="editTeam"/>
-                                <input type="hidden" name="coppaChiosco-id" value="<%=cc[i]._id%>"/>
-                                <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
-                                <input type="submit" value="Aggiungi!"/>
-                            </div>
-                        </div>
-                    </form>
-                <%
-                    }
-                %>
-            </div>
+                    for(var j = startYear; j<=thisYear; j++) {
 
 
-
-            <div class="" style="margin-bottom: 100px;">
-                <h2>Database</h2>
-                <div>
-                    <hr/>
-                    <% 
-                        for (var i=0; i<cc.length; i++){
-                    %>
+            %>
+            <div class="contributi-space">
+                <h2><%=j%></h2>
+            <%
+                        for(var i=contributi.length-1; i>=0; i--){
+                            var currEl = contributi[i]
+                            if(j == parseInt(currEl.anno)){
+                               
+                        
+            %>
+                        <div class="contributi-container clearfix">
                             <div>
-                                <div>
-                                    <b>Nome Squadra:</b> <%=cc[i].nome%>
+                                <div class="el-line">
+                                    <b>Ente</b>: <%=currEl.ente%>
                                 </div>
-                                <div>
-                                    <b>Birre: </b> <%=cc[i].qty%>
+                                <div class="el-line">
+                                    <b>Descrizione</b>: <%=currEl.descrizione%>
                                 </div>
-                                <div>
-                                    <form class="async" id="removeSponsor" class="inline" method="POST">
-                                        <input type="hidden" name="form-submitted" value="removeTeam"/>
-                                        <input type="hidden" name="coppaChiosco-id" value="<%=cc[i]._id%>"/>
-                                        <input type="hidden" name="idDatabase" value="<%=databaseID%>"/>
-                                        <button class="removeButton inline" title="Elimina banner">
-                                            <img src="/images/trash-icon.png" alt="edit"/>
-                                        </button>
-                                    </form>
-                                    <button class="editButton inline" title="edit banner">
-                                        <img src="/images/edit-icon.png" alt="edit"/>
-                                    </button>
+                                <div class="el-line">
+                                    <b>Legge</b>: <%=currEl.legge%>
+                                </div>
+                                <div class="el-line">
+                                    <b>Contributi</b>: <%=currEl.contributo%>
                                 </div>
                             </div>
-
-                            <form class="async edit-section" ref='uploadForm' id='uploadForm' method='post'>
-                                <fieldset>
-                                    <legend>Modifica Team:</legend>
-                                    <div class="form-input">
-                                        <div>
-                                            <label for="nome_squadra">Nome Squadra</label>
-                                        </div>
-                                        <div>
-                                            <input type="text" value="<%=cc[i].nome%>" name="name" id="nome_squadra"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-input">
-                                        <div>
-                                            <label for="qty_squadra">Qty</label>
-                                        </div>
-                                        <div>
-                                            <input type="tel" value="<%=cc[i].qty%>" name="qty" id="qty_squadra"/>
-                                        </div>
-                                    </div>
-
-                                    <input type="hidden" name="form-submitted" value="editTeam"/>
-                                    <input type="hidden" name="coppaChiosco-id" value="<%=cc[i]._id%>"/>
-                                    <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
-                                    <input type="submit" value="Modifica"/>
-                                </fieldset>
-                            </form>
-                            <hr/>
-                    <%
+                        </div>
+            <%
+                            }
                         }
-                    %>
-                </div>
-                <%
-                    }else {
-                %>
-                    <div>
-                        No data
-                    </div>
-                <%
                     }
-                %>
+                }
+            %>
             </div>
-
-
-            <form class="async" ref='uploadForm' id='uploadForm' method='post'>
-                <fieldset>
-                    <legend>Aggiungi Squadra:</legend>
-                    <div class="form-input">
-                        <div>
-                            <label for="nomeSquadra">Nome Squadra</label>
-                        </div>
-                        <div>
-                            <input type="text" value="" name="name" id="nomeSquadra"/>
-                        </div>
-                    </div>
-
-                    <input type="hidden" name="form-submitted" value="addTeam"/>
-                    <input type="hidden" name="qty" value="0"/>
-                    <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
-                    <input type="submit" value="Aggiungi"/>
-                </fieldset>
-            </form>
         </div>
-            
 
-
-        <style>
-            h1 {
-                padding-top: 50px;
-            }
-
-            .removeButton img,
-            .editButton img {
-                width: 20px;
-                height: 20px;
-            }
-
-            .edit-section2 {
-                display: none;
-            }
-
-            .aggiungi-birre-container {
-                margin: 100px 0;
-            }
-
-            .aggiungi-birre {
-                margin: 20px 0;
-                border-bottom: 2px solid green;
-                padding-bottom: 20px;
-            }
-
-            .aggiungi-birre .squadra {
-                width: 15%;
-            }
-
-            .aggiungi-birre .submit {
-                text-align: right;
-                width: 15%;
-            }
-            .aggiungi-birre .birre {
-                width: 70%;
-            }
-
-            .aggiungi-birre,
-            .aggiungi-birre .birre {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-            }
-            .aggiungi-birre input[type="radio"] {
-                width: 1px;
-                height: 1px;
-                position: absolute;
-            }
-            
-            .aggiungi-birre .teams,
-            .aggiungi-birre .quantita {
-                border-radius: 10px;
-                border: 2px solid green;
-                background: #FFF;
-                display: inline-block;
-                color: green;
-                padding: 10px;
-            }
-
-            .aggiungi-birre .teams,
-            .aggiungi-birre input:checked + .quantita {
-                background: green;
-                color: #FFF;
-            }
-
-            .aggiungi-birre input[type="submit"] {
-                background: #333;
-                border-radius: 5px;
-                color: #FFF;
-                padding: 10px;
-            }
-
-            @media (max-width: 600px) {
-
-                .aggiungi-birre {
-                    flex-direction: column;
-                }
-
-                .aggiungi-birre .squadra,
-                .aggiungi-birre .birre,
-                .aggiungi-birre .submit {
-                    width: 100%;
-                    text-align: center;
-                    padding: 10px 0;
-                }
-
-                .aggiungi-birre .birre label {
-                    margin: 10px 0;
-                }
-
-                .aggiungi-birre .squadra .teams,
-                .aggiungi-birre .submit input[type="submit"] {
-                    min-width: 50%;
-                }
-
-                .aggiungi-birre.headings {
-                    display: none;
-                }
-            }
-        </style>
+        <% include ../views/t_footer.ejs %>
     </body>
 </html>
