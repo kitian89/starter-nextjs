@@ -149,20 +149,94 @@
             }
 
             @media (max-width: 600px) {
+                .beer {
+                    padding: 0;
+                    padding-top: 20px;
+                }
+
+                .coppa-chiosco .team {
+                    padding: 0px;
+                    margin: 0px;
+                    border: 0px;
+                    font-size: 14px;
+                }
+                .coppa-chiosco .team > div {
+                    padding: 10px 5px;
+                    border-bottom: 5px solid;
+                    border-top: 5px solid;
+                }
                 .coppa-chiosco .team.pos-1 {
-                    font-size: 40px;
+                    font-size: 20px;
                 }
 
                 .coppa-chiosco .team.pos-2 {
-                    font-size: 35px;
+                    font-size: 18px;
                 }
 
                 .coppa-chiosco .team.pos-3 {
-                    font-size: 30px;
+                    font-size: 16px;
                 }
                 .posizione img {
                     width: 30px;
                     height: 30px;
+                }
+
+                .coppa-chiosco .team .nome {
+                    text-overflow: ellipsis !important;
+                    overflow: hidden !important;
+                    white-space: nowrap;
+                }
+                .screen80percent {
+                    margin: auto 1%;
+                }
+
+                .coppa-chiosco .team .posizione {
+                    border-left: 5px solid;
+                }
+                .coppa-chiosco .team .qty {
+                    border-right: 5px solid;
+                }
+
+
+                .coppa-chiosco .team.pos-1 {
+                    top: 0;
+                }
+                .coppa-chiosco .team.pos-2 {
+                    top: 82px;
+                }
+                .coppa-chiosco .team.pos-3 {
+                    top: 162px;
+                }
+                .coppa-chiosco .team.pos-4 {
+                    top: 237px;
+                }
+                .coppa-chiosco .team.pos-5 {
+                    top: 309px;
+                }
+                .coppa-chiosco .team.pos-6 {
+                    top: 381px;
+                }
+                .coppa-chiosco .team.pos-7 {
+                    top: 453px;
+                }
+                .coppa-chiosco .team.pos-8 {
+                    top: 525px;
+                }
+                .coppa-chiosco .team.pos-9 {
+                    top: 597px;
+                }
+                .coppa-chiosco .team.pos-10 {
+                    top: 669px;
+                }
+                .coppa-chiosco .team.pos-11 {
+                    top: 741px;
+                }
+                .coppa-chiosco .team.pos-12 {
+                    top: 813px;
+                }
+                .coppa-chiosco {
+                    position: relative;
+                    height: 1000px;
                 }
             }
             
@@ -192,7 +266,7 @@
                 for(var i=0;i<nuovaClassifica.length;i++){
                     var that = nuovaClassifica[i]
                     //console.log(that.punti)
-                    $('#' + that.id).find('.qty').html(that.punti)
+                    $('div[id="' + that.id + '"]').find('.qty').html(that.punti)
                 }
 
                 aggiornaPosizioni()
@@ -200,7 +274,7 @@
             function aggiornaPosizioni(){
                 for(var i=0;i<nuovaClassifica.length;i++){
                     var that = nuovaClassifica[i],
-                        thatEl = $('#' + that.id)
+                        thatEl = $('div[id="' + that.id + '"]')
                     //console.log(that.punti)
                     if(i != (parseInt(thatEl.attr('pos'))-1)){
                         var newPos = i+1
