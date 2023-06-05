@@ -46,7 +46,10 @@ $(document).on('ready', function(){
         }, 5000);
     }
     
-    showSlides(slideIndex);
+    if(document.getElementsByClassName("mySlides").length){
+        showSlides(slideIndex);
+    }
+    
     //setInterval(function(){
     //    plusSlides(1)
     //}, 5000)
