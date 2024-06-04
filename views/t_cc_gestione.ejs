@@ -13,6 +13,10 @@
         <% 
             var cc = database[0].coppaChiosco
             var databaseID = database[0].id
+            
+            cc.sort(function(a,b){
+                return a.nome.localeCompare(b.nome);
+            })
         %>
         <%
             if(cc && cc.length){
