@@ -49,6 +49,25 @@ var coppaChiosco = new Schema ({
     qty: Number
 })
 
+var squadreTorneo = new Schema ({
+    nome: String,
+    girone: Number,
+    punti: Number
+})
+
+var partiteTorneo = new Schema ({
+    live: Boolean,
+    ora: String,
+    giorno: String,
+    campo: Number,
+    girone: Number,
+    squadra_casa: String,
+    gol_casa: Number,
+    squadra_ospite: String,
+    gol_ospite: Number,
+    finita: Boolean
+})
+
 var databaseSchema = new Schema({
     homeCarousel: [mainCarouselSchema],
     homeCarouselMobile: [mainCarouselMobileSchema],
@@ -57,7 +76,9 @@ var databaseSchema = new Schema({
     organigramma: [personaSchema],
     sponsors: [sponsorsSchema],
     contributi: [contributoSchema],
-    coppaChiosco: [coppaChiosco]
+    coppaChiosco: [coppaChiosco],
+    squadreTorneo: [squadreTorneo],
+    partiteTorneo: [partiteTorneo]
 });
 
 var database = mongoose.model('database', databaseSchema);

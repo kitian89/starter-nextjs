@@ -705,6 +705,207 @@ app.get('/', function(req, res) {
         }
     }
 })
+
+
+
+.get('/partite', function(req, res){
+    var host = req.hostname,
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'production' : 'staging',
+        pageUrl = req.url,
+        database = require('./tagliamento_module')
+
+    if(env == 'staging'){
+        res.setHeader('X-Robots-Tag', 'noindex');
+    }
+
+    database.find({}, (err, data) => {
+        if (err){ throw err};
+        res.render('t_partite', {database: data, title: 'Partite Admin', env: env, host: host, pageUrl: pageUrl})
+    });
+
+})
+.post('/partite', function(req, res){
+    var host = req.hostname,
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'production' : 'staging',
+        pageUrl = req.url,
+        database = require('./tagliamento_module'),
+        params = req.body
+
+    res.setHeader('X-Robots-Tag', 'noindex');
+
+    console.log('form-submitted: ' + params['form-submitted'])
+
+    if(params['form-submitted']){
+
+        var toPush = {},
+            toPull  = {},
+            elToSet = {},
+            toSet = {},
+            action = ''
+
+        switch(params['form-submitted']) {
+        
+        // -------------------------- ADD ----------------------------------------
+            case 'addTeamTourney':
+                action = 'add'
+                toPush = {
+                    squadreTorneo: {
+                        nome: params.teamName,
+                        girone: params.teamGirone,
+                        punti: params.punti
+                    }
+                }
+                break;
+                
+            case 'addMatch':
+                action = 'add'
+                toPush = {
+                    partiteTorneo: {
+                        live: false,
+                        ora: params.oraPartita,
+                        giorno: params.giornoPartita,
+                        campo: params.campoPartita,
+                        girone: params.teamGirone,
+                        squadra_casa: params.squadra_casa,
+                        gol_casa: 0,
+                        squadra_ospite: params.squadra_ospite,
+                        gol_ospite:0,
+                        finita: false
+                    }
+                }
+                break;
+        // -------------------------- REMOVE ----------------------------------------
+            
+            case 'removeTeam':
+                action = 'remove'
+                toPull = {"$pull": {'coppaChiosco': { '_id': params['coppaChiosco-id']} }}
+                break;
+
+        // -------------------------- UPDATE ----------------------------------------
+            case 'updateTeamTourney':
+                action = 'update'
+                elToSet = {
+                    _id: params['databaseID'],
+                    'squadreTorneo._id': params['squadra-id']
+                }
+                toSet = {
+                    "$set": {
+                        'squadreTorneo.$.nome': params['teamName'], 
+                        'squadreTorneo.$.girone': params['teamGirone'],
+                        'squadreTorneo.$.punti': params['teamPunti'],
+                    }
+                }
+                break;
+                
+            case 'updateMatch':
+                action = 'update'
+                
+                var status = params['status'],
+                    statusLive = false
+                    statusCompleted = false
+                
+                if(status == 'live'){
+                    statusLive = true
+                } else if(status == 'completed'){
+                    statusCompleted = true
+                }
+                
+                
+                elToSet = {
+                    _id: params['databaseID'],
+                    'partiteTorneo._id': params['partita-id']
+                }
+                toSet = {
+                    "$set": {
+                        'partiteTorneo.$.live': statusLive, 
+                        'partiteTorneo.$.ora': params['oraPartita'],
+                        'partiteTorneo.$.giorno': params['giornoPartita'],
+                        'partiteTorneo.$.campo': params['campoPartita'], 
+                        'partiteTorneo.$.girone': params['teamGirone'],
+                        'partiteTorneo.$.squadra_casa': params['squadra_casa'],
+                        'partiteTorneo.$.gol_casa': params['gol_casa'], 
+                        'partiteTorneo.$.squadra_ospite': params['squadra_ospite'],
+                        'partiteTorneo.$.gol_ospite': params['gol_ospite'],
+                        'partiteTorneo.$.finita': statusCompleted
+                    }
+                }
+                
+                break;
+        // DEFAULT NO MATCH
+            default:
+              console.log(`No match`);
+        }
+
+
+        if(action == 'add'){
+            console.log('action ADD')
+            var dbId = params.databaseID
+            
+            database.findOneAndUpdate(
+                {_id: dbId},
+                {"$push": toPush},
+                {new: true},
+                function(err) {
+                    if (err) throw err;
+                    console.log('add completato');
+    
+                    database.find({}, (err, data) => {
+                        if (err){ throw err};
+                        console.log('render')
+                        console.log(data)
+                        res.render('t_partite.ejs', {database: data, title: 'Partite Admin', env: env, host: host, pageUrl: pageUrl})
+                    });
+                }
+            )
+        }else if(action == 'remove'){
+            database.findOneAndUpdate({_id: params['idDatabase']}, toPull, function(err) {
+                if (err) throw err;
+                console.log('Delete completato');
+    
+                database.find({}, (err, data) => {
+                    if (err){ throw err};
+                    console.log('render')
+                    console.log(data)
+                    res.render('t_partite.ejs', {database: data, title: 'Partite Admin', env: env, host: host, pageUrl: pageUrl})
+                });    
+            })
+        }else if(action == 'update'){  
+            console.log('update')          
+
+            database.findOneAndUpdate(elToSet, toSet, function(err) {
+                if (err) throw err;
+                console.log('update completato');
+
+                database.find({}, (err, data) => {
+                    if (err){ throw err};
+                    console.log('render')
+                    console.log(data)
+                    res.render('t_partite.ejs', {database: data, title: 'Partite Admin', env: env, host: host, pageUrl: pageUrl})
+                });           
+            })
+        }
+    }
+})
+.get('/partite-torneo-tv', function(req, res){
+    var host = req.hostname,
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'production' : 'staging',
+        pageUrl = req.url,
+        database = require('./tagliamento_module')
+
+    if(env == 'staging'){
+        res.setHeader('X-Robots-Tag', 'noindex');
+    }
+
+    database.find({}, (err, data) => {
+        if (err){ throw err};
+        res.render('t_risultati-tv-v2', {database: data, title: 'Partite torneo', env: env, host: host, pageUrl: pageUrl})
+    });
+})
+
+
+
+
+
 /*
     NOT FOUND!!!!
 */

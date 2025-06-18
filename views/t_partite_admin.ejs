@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+    <head>
+        <% include ../views/t_head.ejs %>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    </head>
+    <body>
+        <div class="loading"></div>
+        <h1>
+            Partite Admin
+        </h1>
+        <hr/>
+
+        <% 
+            var cc = database[0].coppaChiosco
+            var databaseID = database[0].id
+            var squadre = database[0].squadreTorneo
+            var partite = database[0].partiteTorneo
+            cc.sort(function(a,b){
+                return a.nome.localeCompare(b.nome);
+            })
+        %>
+        
+        <div class="screen60percent" id="main">
+            <div>
+                <h1>Squadre</h1>
+                <div>
+                    <h2 class="showHideButton">Aggiungi squadra</h2>
+                    <div class="hide">
+                        <form class="async" ref='uploadForm' id='uploadForm' method='post' >
+                            <fieldset>
+                                <legend>Nuova squadra</legend>
+                                
+                                <div class="space">
+                                    <label for="teamName">Nome Squadra</label>
+                                    <input name="teamName" value="" id="teamName"/>
+                                </div>
+                                
+                                <div class="space">
+                                    <label for="teamGirone">Girone</label>
+                                    <select name="teamGirone" id="teamGirone">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                                
+                                
+                                <div class="submit">
+                                    <input type="hidden" name="punti" value="0"/>
+                                    <input type="hidden" name="form-submitted" value="addTeamTourney"/>
+                                    <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                        <input type="submit" value="Aggiungi!"/>
+                                </div>
+                                
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="showHideButton">Modifica squadre</h2>
+                    <div class="hide">
+                        <%
+                            for(var i = 0; i < squadre.length; i++) {
+                        %>
+                        
+                        <form class="async" ref='uploadForm' id='uploadForm' method='post'>
+                            <fieldset>
+                                <legend><%=squadre[i].nome%></legend>
+                                <div class="space">
+                                    <label for="teamName">Nome Squadra</label>
+                                    <input name="teamName" value="<%=squadre[i].nome%>" id="teamName"/>
+                                </div>
+                                
+                                <div class="space">
+                                    <label for="teamGirone">Girone</label>
+                                    <select name="teamGirone" id="teamGirone">
+                                        <option value="1" <%=squadre[i].girone == 1 ? 'selected' : ''%>>1</option>
+                                        <option value="2" <%=squadre[i].girone == 2 ? 'selected' : ''%>>2</option>
+                                        <option value="3" <%=squadre[i].girone == 3 ? 'selected' : ''%>>3</option>
+                                        <option value="4" <%=squadre[i].girone == 4 ? 'selected' : ''%>>4</option>
+                                    </select>
+                                </div>
+                                    
+                                <div class="space">
+                                    <label for="teamPunti">Punti</label>
+                                    <input type="text" name="teamPunti" value="<%=squadre[i].punti || 0%>"/>
+                                </div>
+                                
+                                <div class="submit">
+                                    <input type="hidden" name="squadra-id" value="<%=squadre[i]._id%>"/>
+                                    <input type="hidden" name="form-submitted" value="updateTeamTourney"/>
+                                    <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                    <input type="submit" value="Modifica!"/>
+                                </div>
+                            </fieldset>
+                        </form>
+                        
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1>Partite</h1>
+                <div>
+                    <h2 class="showHideButton">Aggiungi partita</h2>
+                    <div class="hide">
+                        <form class="async" ref='uploadForm' id='uploadForm' method='post'>
+                            <div class="space">
+                                <label for="giornoPartita">Giorno</label>
+                                <div>
+                                    <input name="giornoPartita" type="radio" value="20"/> Venerdì 20
+                                </div>
+                                <div>
+                                    <input name="giornoPartita" type="radio" value="21"/> Sabato 21
+                                </div>
+                            </div>
+                            
+                            <div class="space">
+                                <label for="oraPartita">Ora</label>
+                                <input type="text" value="" id="oraPartita" name="oraPartita"/>
+                            </div>
+                            
+                            
+                            <div class="space">
+                                <label for="campoPartita">Campo</label>
+                                <div>
+                                    <input name="campoPartita" type="radio" value="1"/> 1
+                                </div>
+                                <div>
+                                    <input name="campoPartita" type="radio" value="2"/> 2
+                                </div>
+                            </div>
+                            
+                            <div class="space">
+                                <label for="teamGirone">Girone</label>
+                                <select name="teamGirone" id="teamGirone">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            
+                            <div class="space">
+                                Squadra 1:
+                                <select name="squadra_casa" id="squadra_casa">
+                                    
+                                    <%
+                                        for(var j=0; j<squadre.length; j++){
+                                    %>
+                                                
+                                        <option value="<%=squadre[j]._id%>"><%=squadre[j].nome%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+                            <div class="space">
+                                Squadra 2:
+                                <select name="squadra_ospite" id="squadra_ospite">
+                                    
+                                    <%
+                                        for(var j=0; j<squadre.length; j++){
+                                    %>
+                                    
+                                    <option value="<%=squadre[j]._id%>"><%=squadre[j].nome%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+                            
+                            <div class="submit">
+                                <input type="hidden" name="form-submitted" value="addMatch"/>
+                                <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                <input type="submit" value="Aggiungi!"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="showHideButton">Modifica partite</h2>
+                    <div class="hide">
+                        <%
+                            for(var i = 0; i < partite.length; i++) {
+
+                        
+                                for(var k=0; k<squadre.length; k++){
+                                    if(partite[i].squadra_casa == squadre[k]._id){
+                                        squadraCasa = squadre[k].nome
+                                    }else if(partite[i].squadra_ospite == squadre[k]._id){
+                                        squadraOspite = squadre[k].nome
+                                    }
+                                }
+                        %>
+                        <form class="async <%=partite[i].live == true ? 'live' : ''%> <%=partite[i].finita == true ? 'finita' : ''%>" ref='uploadForm' id='uploadForm' method='post'>
+                            <fieldset>
+                                <legend><%=squadraCasa%> - <%=squadraOspite%></legend>
+                                <div class="space">
+                                    <label for="campoPartita">Stato</label>
+                                    <div>
+                                        <input name="status" type="radio" value="toPlay" <%=partite[i].live == false && partite[i].finita == false ? 'checked' : ''%>/> Da Giocare
+                                    </div>
+                                    <div>
+                                        <input name="status" type="radio" value="live" <%=partite[i].live == true ? 'checked' : ''%>/> Live
+                                    </div>
+                                    <div>
+                                        <input name="status" type="radio" value="completed" <%=partite[i]?.finita == true ? 'checked' : ''%>/> Finita
+                                    </div>
+                                </div>
+                                <div class="space">
+                                    <label for="giornoPartita">Giorno</label>
+                                    <div>
+                                        <input name="giornoPartita" type="radio" value="20" <%=partite[i].giorno == 20 ? 'checked' : ''%>/> Venerdì 20
+                                    </div>
+                                    <div>
+                                        <input name="giornoPartita" type="radio" value="21" <%=partite[i].giorno == 21 ? 'checked' : ''%>/> Sabato 21
+                                    </div>
+                                </div>
+                                
+                                <div class="space">
+                                    <label for="oraPartita">Ora</label>
+                                    <input type="text" value="<%=partite[i].ora%>" id="oraPartita" name="oraPartita"/>
+                                </div>
+                                
+                                
+                                <div class="space">
+                                    <label for="campoPartita">Campo</label>
+                                    <div>
+                                        <input name="campoPartita" type="radio" value="1" <%=partite[i].campo == 1 ? 'checked' : ''%>/> 1
+                                    </div>
+                                    <div>
+                                        <input name="campoPartita" type="radio" value="2 <%=partite[i].campo == 2 ? 'checked' : ''%>"/> 2
+                                    </div>
+                                </div>
+                                
+                                <div class="space">
+                                    <label for="teamGirone">Girone</label>
+                                    <select name="teamGirone" id="teamGirone">
+                                        <option value="1" <%=partite[i].girone == 1 ? 'selected' : ''%>>1</option>
+                                        <option value="2" <%=partite[i].girone == 2 ? 'selected' : ''%>>2</option>
+                                        <option value="3" <%=partite[i].girone == 3 ? 'selected' : ''%>>3</option>
+                                        <option value="4" <%=partite[i].girone == 4 ? 'selected' : ''%>>4</option>
+                                    </select>
+                                </div>
+                                
+                                
+                                <div class="space">
+                                    <label for="gol_casa"><%=squadraCasa%></label>
+                                    <input type="hidden" name="squadra_casa" value="<%=partite[i].squadra_casa%>"/>
+                                    <input name="gol_casa" value="<%=partite[i].gol_casa%>" id="gol_casa"/>
+                                </div>
+                                
+                                <div class="space">
+                                    <label for="gol_ospite"><%=squadraOspite%></label>
+                                    <input type="hidden" name="squadra_ospite" value="<%=partite[i].squadra_ospite%>"/>
+                                    <input name="gol_ospite" value="<%=partite[i].gol_ospite%>" id="gol_ospite"/>
+                                </div>
+                                
+                                
+                                
+                                <div class="submit">
+                                    <input type="hidden" name="partita-id" value="<%=partite[i]._id%>"/>
+                                    <input type="hidden" name="form-submitted" value="updateMatch"/>
+                                    <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
+                                    <input type="submit" value="Modifica!"/>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <%
+            for(var i=1; i<=4; i++){
+        %>
+        <h2>Girone <%=i%></h2>
+            
+            <h3>Squadre</h3>
+            <%
+                for(var j=0; j<squadre.length; j++){
+                    if(squadre[j].girone == i){
+            %>
+                        <div><%=squadre[j].nome%></div>
+            <%
+                    }
+                }
+            %>
+            <h3>Partite</h3>
+        
+            <%
+                var venerdiAdded = false,
+                    sabatoAdded = false
+                for(var j=0; j<partite.length; j++){
+                    if(partite[j].girone == i){
+                        var squadraCasa = '',
+                            squadraOspite = ''
+                        for(var k=0; k<squadre.length; k++){
+                            if(partite[j].squadra_casa == squadre[k]._id){
+                                squadraCasa = squadre[k].nome
+                            }else if(partite[j].squadra_ospite == squadre[k]._id){
+                                squadraOspite = squadre[k].nome
+                            }
+                        }
+                        
+                        if(!venerdiAdded && partite[j].giorno == '20'){
+                            venerdiAdded = true
+                %>
+                            <h4>Venerdì</h4>
+                <%
+                        }else if(!sabatoAdded && partite[j].giorno == '21'){
+                            sabatoAdded = true
+                %>
+                            <h4>Sabato</h4>
+                <%
+                        }
+                        
+                        
+                        %>
+        <div><%=partite[j].ora%> | <%=partite[j].campo%> | <%=squadraCasa%> - <%=squadraOspite%> | <%=partite[j].gol_casa%> - <%=partite[j].gol_ospite%></div>
+                        <%
+                    }
+                }
+            %>
+        <%
+            }
+        %>
+        
+        <div id="test"></div>
+    </body>
+</html>

@@ -6,6 +6,44 @@ $(window).on('resize', function() {
 
 $(document).on('ready', function(){
     isMobileFunc()
+    
+    
+    $(document).on('submit', 'form', function(e){
+        e.preventDefault()
+        console.log('submit')
+        
+        $('.loading').show()
+        
+        var form = $(e.currentTarget),
+            inputList = form.find('input:not([type="submit"]), select'),
+            url = document.location.href,
+            data = ''
+            
+        for(var i = 0; i < inputList.length; i++){
+            if(inputList[i].getAttribute('type') != 'radio' || (inputList[i].getAttribute('type') == 'radio' && inputList[i].checked)){
+                data += (inputList[i].getAttribute('name') + '=' + inputList[i].value +'&')
+            }
+        }
+        $.ajax({
+            method: "POST",
+            url: url,
+            data: data,
+            dataType: "html",
+            success: function(response){
+                $('body').html(response)
+            }
+        });
+        
+    })
+    
+    $(document).on('click', '.showHideButton', function(e){
+        $(e.currentTarget).next().toggle()
+    })
+    
+    
+    $(document).on('click', '.partita_finita .edit_match', function(e){
+        $(e.currentTarget).parent().parent().next('.match_ended').toggle()
+    })
 
     if($('#homeVideo').length){
         setTimeout(function(){
@@ -128,3 +166,50 @@ var isMobile = {
         return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.platform_iOS() || isMobile.Opera() || isMobile.Windows());
     }
 };
+
+
+/* 
+var status = form.find('input[name="status"][checked]').val()
+if(status == 'completed'){
+    var teamGirone = form.find('select[name="teamGirone"]').val(),
+        partitaId = form.find('input[name="partita-id"]').val(),
+        databaseID = form.find('input[name="databaseID"]').val(),
+    
+    
+        squadraCasa = form.find('input[name="squadra_casa"]').val(),
+        nomeCasa = form.find('input[name="nome_casa"]').val(),
+        golCasa = form.find('input[name="gol_casa"]').val(),
+        puntiCasa = form.find('input[name="punti_casa"]').val(),
+        
+        squadraOspite = form.find('input[name="squadra_ospite"]').val(),
+        nomeOspite = form.find('input[name="nome_ospite"]').val(),
+        golOspite = form.find('input[name="gol_ospite"]').val(),
+        puntiOspite = form.find('input[name="punti_ospite"]').val()
+        
+    if(golCasa == golOspite){
+        
+    }else {
+        var dataUpdatePoints = ''
+        // win casa
+        console
+        if(golCasa > golOspite){
+            dataUpdatePoints = 'form-submitted=updateTeamTourney&databaseID=' + databaseID + '&squadra-id=' + squadraCasa  + '&teamName=' + nomeCasa + '&teamGirone=' + teamGirone + '&teamPunti=' + (parseInt(puntiCasa) + 3)
+        }
+        // win ospite
+        else if(golCasa < golOspite) {
+            dataUpdatePoints = 'form-submitted=updateTeamTourney&databaseID=' + databaseID + '&squadra-id=' + squadraOspite  + '&teamName=' + nomeOspite + '&teamGirone=' + teamGirone + '&teamPunti=' + (parseInt(puntiOspite) + 3)
+        }
+
+        console.log('dataUpdatePoints: '+ dataUpdatePoints)
+        $.ajax({
+            method: "POST",
+            url: url,
+            data: dataUpdatePoints,
+            dataType: "html",
+            success: function(response){
+                console.log('success')
+            }
+        });
+    }
+}
+ */
