@@ -52,7 +52,8 @@ var coppaChiosco = new Schema ({
 var squadreTorneo = new Schema ({
     nome: String,
     girone: Number,
-    punti: Number
+    punti: Number,
+    marcatori: String
 })
 
 var partiteTorneo = new Schema ({
@@ -63,8 +64,10 @@ var partiteTorneo = new Schema ({
     girone: Number,
     squadra_casa: String,
     gol_casa: Number,
+    marcatori_casa: String,
     squadra_ospite: String,
     gol_ospite: Number,
+    marcatori_ospite: String,
     finita: Boolean
 })
 

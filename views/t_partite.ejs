@@ -19,8 +19,20 @@
             cc.sort(function(a,b){
                 return a.nome.localeCompare(b.nome);
             })
+            
+            
+            for(var i = 0; i < partite.length; i++) {
+                if(partite[i].finita == true){
+                    for(var j=0; j<squadre.length; j++){
+                        if(partite[i].squadra_casa == squadre[j]._id){
+                            squadre[j].marcatori += (partite[i].marcatori_casa + '-')
+                        }else if(partite[i].squadra_ospite == squadre[j]._id){
+                            squadre[j].marcatori += (partite[i].marcatori_ospite + '-')
+                        }
+                    }
+                }
+            }
         %>
-        
         <div class="screen60percent" id="main">
             <div>
                 <h1>Partite</h1>
@@ -89,11 +101,7 @@
                                                 <div>
                                                     <input name="status" type="radio" value="toPlay" <%=partite[i].live == false && partite[i].finita == false ? 'checked' : ''%>/> Da Giocare
                                                 </div>
-                                                <!--
-                                                <div>
-                                                    <input name="status" type="radio" value="live" <%=partite[i].live == true ? 'checked' : ''%>/> Live
-                                                </div>
-                                                -->
+                                                
                                                 <div>
                                                     <input name="status" type="radio" value="completed" <%=partite[i]?.finita == true ? 'checked' : ''%>/> Finita
                                                 </div>
@@ -136,19 +144,37 @@
                                             </div>
                                             
                                             <div class="space">
-                                                <label for="gol_casa"><%=squadraCasa%></label>
-                                                <input type="hidden" name="squadra_casa" value="<%=partite[i].squadra_casa%>"/>
-                                                <input name="gol_casa" value="<%=partite[i].gol_casa%>" id="gol_casa"/>
-                                                <input name="punti_casa" value="<%=puntiCasa%>" id="punti_casa" type="hidden"/>
-                                                <input name="nome_casa" value="<%=squadraCasa%>" id="nome_casa" type="hidden"/>
+                                                <fieldset>
+                                                    <label for="gol_casa"><%=squadraCasa%></label>
+                                                    <input type="hidden" name="squadra_casa" value="<%=partite[i].squadra_casa%>"/>
+                                                    <div class="space">
+                                                        <label>GOL:</label>
+                                                        <input name="gol_casa" value="<%=partite[i].gol_casa%>" id="gol_casa"/>
+                                                    </div>
+                                                    <div class="space">
+                                                        <label>MARCATORI:</label>
+                                                        <input name="marcatori_casa" value="<%=partite[i].marcatori_casa%>" id="marcatori_casa"/>
+                                                    </div>
+                                                    <input name="punti_casa" value="<%=puntiCasa%>" id="punti_casa" type="hidden"/>
+                                                    <input name="nome_casa" value="<%=squadraCasa%>" id="nome_casa" type="hidden"/>
+                                                </fieldset>
                                             </div>
                                             
                                             <div class="space">
-                                                <label for="gol_ospite"><%=squadraOspite%></label>
-                                                <input type="hidden" name="squadra_ospite" value="<%=partite[i].squadra_ospite%>"/>
-                                                <input name="gol_ospite" value="<%=partite[i].gol_ospite%>" id="gol_ospite"/>
-                                                <input name="punti_ospite" value="<%=puntiOspite%>" id="punti_ospite" type="hidden"/>
-                                                <input name="nome_ospite" value="<%=squadraOspite%>" id="nome_ospite" type="hidden"/>
+                                                <fieldset>
+                                                    <label for="gol_ospite"><%=squadraOspite%></label>
+                                                    <input type="hidden" name="squadra_ospite" value="<%=partite[i].squadra_ospite%>"/>
+                                                    <div class="space">
+                                                        <label>GOL:</label>
+                                                        <input name="gol_ospite" value="<%=partite[i].gol_ospite%>" id="gol_ospite"/>
+                                                    </div>
+                                                    <div class="space">
+                                                        <label>MARCATORI:</label>
+                                                        <input name="marcatori_ospite" value="<%=partite[i].marcatori_ospite%>" id="marcatori_ospite"/>
+                                                    </div>
+                                                    <input name="punti_ospite" value="<%=puntiOspite%>" id="punti_ospite" type="hidden"/>
+                                                    <input name="nome_ospite" value="<%=squadraOspite%>" id="nome_ospite" type="hidden"/>
+                                                </fieldset>
                                             </div>
                                             
                                             
@@ -246,6 +272,23 @@
                 </div>
             </div>
             <div>
+                <h1>Marcatori</h1>
+                <%
+                    for(var i = 0; i < squadre.length; i++) {
+                %>
+                        <div>
+                            <h4>
+                                <%=squadre[i].nome%>
+                            </h4>
+                            <div>
+                                <%=squadre[i].marcatori%>
+                            </div>
+                        </div>
+                <%
+                    }
+                %>
+            </div>
+            <div>
                 <h1>Squadre</h1>
                 <div>
                     <h2 class="showHideButton">Aggiungi squadra</h2>
@@ -329,61 +372,5 @@
             </div>
         </div>
         
-        <!-- 
-        <%
-            for(var i=1; i<=4; i++){
-        %>
-        <h2>Girone <%=i%></h2>
-            
-            <h3>Squadre</h3>
-            <%
-                for(var j=0; j<squadre.length; j++){
-                    if(squadre[j].girone == i){
-            %>
-                        <div><%=squadre[j].nome%></div>
-            <%
-                    }
-                }
-            %>
-            <h3>Partite</h3>
-        
-            <%
-                var venerdiAdded = false,
-                    sabatoAdded = false
-                for(var j=0; j<partite.length; j++){
-                    if(partite[j].girone == i){
-                        var squadraCasa = '',
-                            squadraOspite = ''
-                        for(var k=0; k<squadre.length; k++){
-                            if(partite[j].squadra_casa == squadre[k]._id){
-                                squadraCasa = squadre[k].nome
-                            }else if(partite[j].squadra_ospite == squadre[k]._id){
-                                squadraOspite = squadre[k].nome
-                            }
-                        }
-                        
-                        if(!venerdiAdded && partite[j].giorno == '20'){
-                            venerdiAdded = true
-                %>
-                            <h4>Venerdì</h4>
-                <%
-                        }else if(!sabatoAdded && partite[j].giorno == '21'){
-                            sabatoAdded = true
-                %>
-                            <h4>Sabato</h4>
-                <%
-                        }
-                        
-                        
-                        %>
-        <div><%=partite[j].ora%> | <%=partite[j].campo%> | <%=squadraCasa%> - <%=squadraOspite%> | <%=partite[j].gol_casa%> - <%=partite[j].gol_ospite%></div>
-                        <%
-                    }
-                }
-            %>
-        <%
-            }
-        %>
-         -->
     </body>
 </html>

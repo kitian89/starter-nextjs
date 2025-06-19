@@ -768,8 +768,10 @@ app.get('/', function(req, res) {
                         girone: params.teamGirone,
                         squadra_casa: params.squadra_casa,
                         gol_casa: 0,
+                        marcatori_casa: '',
                         squadra_ospite: params.squadra_ospite,
                         gol_ospite:0,
+                        marcatori_ospite: '',
                         finita: false
                     }
                 }
@@ -824,8 +826,10 @@ app.get('/', function(req, res) {
                         'partiteTorneo.$.girone': params['teamGirone'],
                         'partiteTorneo.$.squadra_casa': params['squadra_casa'],
                         'partiteTorneo.$.gol_casa': params['gol_casa'], 
+                        'partiteTorneo.$.marcatori_casa': params['marcatori_casa'],
                         'partiteTorneo.$.squadra_ospite': params['squadra_ospite'],
                         'partiteTorneo.$.gol_ospite': params['gol_ospite'],
+                        'partiteTorneo.$.marcatori_ospite': params['marcatori_ospite'],
                         'partiteTorneo.$.finita': statusCompleted
                     }
                 }

@@ -278,14 +278,12 @@
             }
         </style>
         <script>
-            $(document).on('ready', function(){
-                $('.editButton').on('click', function(){
-                    var that = $(this)
-                    console.log('click')
-
-                    that.parent().parent().next('form.edit-section').toggle()
-                })
-            })
+            
+            $(document).on('click', '.editButton', function(e){
+                var that = $(e.currentTarget)
+                console.log('click')
+                that.parent().parent().next('form.edit-section').toggle()
+           })
             
         </script>
     </body>
