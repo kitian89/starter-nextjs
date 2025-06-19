@@ -150,6 +150,145 @@
             </div>
         </div>
                 
+        <div class="faseFinale">
+            <div class=" quarti">
+                <h2>Quarti di Finale</h2>
+                <%
+                    for(var j=0; j<partite.length; j++){
+                        if(partite[j].girone == 18){
+                            var squadraCasa = '',
+                                squadraOspite = ''
+                            for(var k=0; k<squadre.length; k++){
+                                if(partite[j].squadra_casa == squadre[k]._id){
+                                    squadraCasa = squadre[k].nome
+                                }else if(partite[j].squadra_ospite == squadre[k]._id){
+                                    squadraOspite = squadre[k].nome
+                                }
+                            }
+                            %>
+                            
+                            
+                            <div class="partite">
+                                <div class="partita">
+                                    <div class="squadra" style="display: flex; justify-content: space-between;">
+                                        <span><%=squadraCasa%></span><span><%=partite[j].gol_casa%></span>                            
+                                    </div>
+                                    <div class="squadra" style="display: flex; justify-content: space-between;">
+                                        <span><%=squadraOspite%></span><span><%=partite[j].gol_ospite%></span>     
+                                    </div>
+                                    <div class="infoPartita">
+                                        <%=partite[j].ora%> | campo <%=partite[j].campo%>
+                                    </div>
+                                </div>
+                            </div>
+                        <%
+                        }
+                    }
+                %>
+            </div>
+            <div class=" semifinale">
+                <h2>Semifinale</h2>
+                
+                <%
+                    for(var j=0; j<partite.length; j++){
+                        if(partite[j].girone == 14){
+                            var squadraCasa = '',
+                                squadraOspite = ''
+                            for(var k=0; k<squadre.length; k++){
+                                if(partite[j].squadra_casa == squadre[k]._id){
+                                    squadraCasa = squadre[k].nome
+                                }else if(partite[j].squadra_ospite == squadre[k]._id){
+                                    squadraOspite = squadre[k].nome
+                                }
+                            }
+                            %>
+                
+                                <div class="partite">
+                                    <div class="partita">
+                                        <div class="squadra" style="display: flex; justify-content: space-between;">
+                                            <span><%=squadraCasa%></span><span><%=partite[j].gol_casa%></span>                          
+                                        </div>
+                                        <div class="squadra" style="display: flex; justify-content: space-between;">
+                                            <span><%=squadraOspite%></span><span><%=partite[j].gol_ospite%></span>                               
+                                        </div>
+                                        <div class="infoPartita">
+                                            <%=partite[j].ora%> | campo <%=partite[j].campo%>
+                                        </div>
+                                    </div>
+                                </div>
+                            <%
+                        }
+                    }
+                %>
+                
+            </div>
+            <div class=" finale">
+                <h2>Finale</h2>
+                
+                <%
+                    for(var j=0; j<partite.length; j++){
+                        if(partite[j].girone == 11){
+                            var squadraCasa = '',
+                                squadraOspite = ''
+                            for(var k=0; k<squadre.length; k++){
+                                if(partite[j].squadra_casa == squadre[k]._id){
+                                    squadraCasa = squadre[k].nome
+                                }else if(partite[j].squadra_ospite == squadre[k]._id){
+                                    squadraOspite = squadre[k].nome
+                                }
+                            }
+                            %>
+                                <div class="partite">
+                                    <div class="partita">
+                                        <div class="squadra" style="display: flex; justify-content: space-between; font-size: 30px;">
+                                            <span><%=squadraCasa%></span><span><%=partite[j].gol_casa%></span>                            
+                                        </div>
+                                        <div class="squadra" style="display: flex; justify-content: space-between; font-size: 30px;">
+                                            <span><%=squadraOspite%></span><span><%=partite[j].gol_ospite%></span>                            
+                                        </div>
+                                        <div class="infoPartita">
+                                            <%=partite[j].ora%> | campo <%=partite[j].campo%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%
+                        }
+                    }
+                %>
+                
+                <%
+                    for(var j=0; j<partite.length; j++){
+                        if(partite[j].girone == 13){
+                            var squadraCasa = '',
+                                squadraOspite = ''
+                            for(var k=0; k<squadre.length; k++){
+                                if(partite[j].squadra_casa == squadre[k]._id){
+                                    squadraCasa = squadre[k].nome
+                                }else if(partite[j].squadra_ospite == squadre[k]._id){
+                                    squadraOspite = squadre[k].nome
+                                }
+                            }
+                            %>
+                <div class="partite">
+                    <h4>Terzo / Quarto Posto</h4>
+                    <div class="partita">
+                        <div class="squadra" style="display: flex; justify-content: space-between;">
+                            <span><%=squadraCasa%></span><span><%=partite[j].gol_casa%></span>                            
+                        </div>
+                        <div class="squadra" style="display: flex; justify-content: space-between;">
+                            <span><%=squadraOspite%></span><span><%=partite[j].gol_ospite%></span>                            
+                        </div>
+                        <div class="infoPartita">
+                            <%=partite[j].ora%> | campo <%=partite[j].campo%>
+                        </div>
+                    </div>
+                </div>
+                <%
+                        }
+                    }
+                %>
+            </div>
+        </div>
                 
         
         <style>
@@ -308,5 +447,11 @@
             }
 
         </style>
+        
+        <script>
+            setTimeout(function(){
+                window.location.reload()
+            }, 5000)
+        </script>
     </body>
 </html>

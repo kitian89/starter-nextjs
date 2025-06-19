@@ -39,6 +39,11 @@
                 <div>
                     <div class="">
                         <%
+                            var quartiTitleAdded = false,
+                                semifinaleTitleAdded = false,
+                                terzopostoTitleAdded = false,
+                                finaleTitleAdded = false
+                                
                             for(var i = 0; i < partite.length; i++) {
                             
                         
@@ -49,6 +54,11 @@
                                     }else if(partite[i].squadra_ospite == squadre[k]._id){
                                         squadraOspite = squadre[k].nome
                                         puntiOspite = squadre[k].punti
+                                    }else if(partite[i].squadra_casa == '-' || partite[i].squadra_ospite == '-'){
+                                        squadraCasa = ''
+                                        puntiCasa = 0
+                                        squadraOspite = ''
+                                        puntiOspite = 0
                                     }
                                 }
                                 
@@ -91,7 +101,31 @@
                         <%
                                 }
                         %>
-                                  
+                                
+                                
+                                <%
+                                    if(!quartiTitleAdded && partite[i].girone == 18){
+                                        quartiTitleAdded = true
+                                %>
+                                        <h2>Quarti</h2>
+                                <%
+                                    }else if(!semifinaleTitleAdded && partite[i].girone == 14){
+                                        semifinaleTitleAdded = true
+                                        %>
+                                        <h2>Semifinale</h2>
+                                <%
+                                    }if(!terzopostoTitleAdded && partite[i].girone == 13){
+                                        terzopostoTitleAdded = true
+                                        %>
+                                        <h2>Terzo/Quarto posto</h2>
+                                <%
+                                    }if(!finaleTitleAdded && partite[i].girone == 11){
+                                        finaleTitleAdded = true
+                                        %>
+                                        <h2>Finale</h2>
+                                <%
+                                    }
+                                %>
                                 <div class="<%=partite[i].finita == true ? 'match_ended' : ''%>">
                                     <form class="async" ref='uploadForm' id='uploadForm' method='post'>
                                         <fieldset>
@@ -140,6 +174,10 @@
                                                     <option value="2" <%=partite[i].girone == 2 ? 'selected' : ''%>>2</option>
                                                     <option value="3" <%=partite[i].girone == 3 ? 'selected' : ''%>>3</option>
                                                     <option value="4" <%=partite[i].girone == 4 ? 'selected' : ''%>>4</option>
+                                                    <option value="18" <%=partite[i].girone == 18 ? 'selected' : ''%>>Quarti di finale</option>
+                                                    <option value="14" <%=partite[i].girone == 14 ? 'selected' : ''%>>Semifinale</option>
+                                                    <option value="13" <%=partite[i].girone == 13 ? 'selected' : ''%>>Finale 3°- 4° posto</option>
+                                                    <option value="11" <%=partite[i].girone == 11 ? 'selected' : ''%>>Finale 1° - 2° posto</option>
                                                 </select>
                                             </div>
                                             
@@ -230,6 +268,10 @@
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
+                                    <option value="18">Quarti di finale</option>
+                                    <option value="14">Semifinale</option>
+                                    <option value="13">Finale 3°- 4° posto</option>
+                                    <option value="11">Finale 1° - 2° posto</option>
                                 </select>
                             </div>
                             
@@ -265,7 +307,7 @@
                             <div class="submit">
                                 <input type="hidden" name="form-submitted" value="addMatch"/>
                                 <input type="hidden" name="databaseID" value="<%=databaseID%>"/>
-                                    <input type="submit" value="Aggiungi!"/>
+                                <input type="submit" value="Aggiungi!"/>
                             </div>
                         </form>
                     </div>
@@ -309,6 +351,10 @@
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
+                                        <option value="18">Quarti di finale</option>
+                                        <option value="14">Semifinale</option>
+                                        <option value="13">Finale 3°- 4° posto</option>
+                                        <option value="11">Finale 1° - 2° posto</option>
                                     </select>
                                 </div>
                                 
@@ -347,6 +393,10 @@
                                         <option value="2" <%=squadre[i].girone == 2 ? 'selected' : ''%>>2</option>
                                         <option value="3" <%=squadre[i].girone == 3 ? 'selected' : ''%>>3</option>
                                         <option value="4" <%=squadre[i].girone == 4 ? 'selected' : ''%>>4</option>
+                                        <option value="18" <%=squadre[i].girone == 18 ? 'selected' : ''%>>Quarti di finale</option>
+                                        <option value="14" <%=squadre[i].girone == 14 ? 'selected' : ''%>>Semifinale</option>
+                                        <option value="13" <%=squadre[i].girone == 13 ? 'selected' : ''%>>Finale 3°- 4° posto</option>
+                                        <option value="11" <%=squadre[i].girone == 11 ? 'selected' : ''%>>Finale 1° - 2° posto</option>
                                     </select>
                                 </div>
                                     
