@@ -132,7 +132,7 @@
                                             <legend> <%=partite[i].giorno == '20' ? 'Ven.' : 'Sab.'%> <%=partite[i].ora%> | <%=squadraCasa%> - <%=squadraOspite%></legend>
                                             <div class="space">
                                                 <label for="campoPartita">Stato</label>
-                                                <div>
+                                                <div class="space-tb">
                                                     <input name="status" type="radio" value="toPlay" <%=partite[i].live == false && partite[i].finita == false ? 'checked' : ''%>/> Da Giocare
                                                 </div>
                                                 
@@ -421,6 +421,11 @@
                 </div>
             </div>
         </div>
-        
+        <style>
+            input[name="status"] {
+                width: 25px;
+                height: 25px;
+            }
+        </style>
     </body>
 </html>

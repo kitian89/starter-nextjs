@@ -16,7 +16,7 @@
             
             for(var i = 0; i < partite.length; i++) {
             
-                if(partite[i].finita == true){
+                if(partite[i].finita == true && (partite[i].girone == 1 || partite[i].girone == 2 || partite[i].girone == 3 || partite[i].girone == 4)){
                     // drawn
                     if(partite[i].gol_casa == partite[i].gol_ospite){
                         for(var j=0; j<squadre.length; j++){
