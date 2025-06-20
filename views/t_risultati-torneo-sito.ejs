@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    </head>
+    <body>
+        
+        <% 
+            var databaseID = database[0].id
+            var squadre = database[0].squadreTorneo
+            var partite = database[0].partiteTorneo
+        %>
+        
+        <div class="container">
+            <h2>Gironi</h2>
+
+            <style>
+                @media screen and (min-width: 1280px) {
+                    .risultati.mobile {
+                        display: none;
+                    }
+                }
+                @media screen and (max-width: 1280px) {
+                    .risultati.desktop {
+                        display: none;
+                    }
+                }
+            </style>
+
+            <table class="risultati gironi desktop">
+                <tbody>
+                    <%
+                        for(var i = 1; i <= 4; i++) {
+                    %>
+                        <tr>
+                            <th colspan="4">GIRONE <%=i%></th>
+                        </tr>
+                        <tr>
+                            <%
+                                for(var j = 0; j < squadre.length; j++) {
+                                    if(i == squadre[j].girone){
+                            %>
+                                <td><%=squadre[j].nome%></td>
+                            <%
+                                    }
+                                }
+                            %>
+                        </tr>
+                    <%
+                        }
+                    %>
+                </tbody>
+            </table>
+
+            <table class="risultati gironi mobile">
+                <tbody>
+                    <%
+                        for(var i = 1; i <= 4; i++) {
+                    %>
+                        <tr>
+                            <th colspan="4">GIRONE <%=i%></th>
+                        </tr>
+                        <%
+                            for(var j = 0; j < squadre.length; j++) {
+                                if(i == squadre[j].girone){
+                        %>
+                            <tr>
+                                <td><%=squadre[j].nome%></td>
+                            </tr>
+                        <%
+                                }
+                            }
+                        }
+                    %>
+                </tbody>
+            </table>
+            <div class="">
+                <div class="gironi">
+                    <%
+                    for(var i=1; i<=4; i++){
+                %>
+                    <div class="girone">
+                        
+                        <div class="girone-contenuto">
+                            <div class="calendario">
+                                <h2>Girone <%=i%></h2>
+                                <%
+                                for(var j=0; j<partite.length; j++){
+                                    if(partite[j].girone == i){
+                                        var squadraCasa = '',
+                                            squadraOspite = ''
+                                        for(var k=0; k<squadre.length; k++){
+                                            if(partite[j].squadra_casa == squadre[k]._id){
+                                                squadraCasa = squadre[k].nome
+                                            }else if(partite[j].squadra_ospite == squadre[k]._id){
+                                                squadraOspite = squadre[k].nome
+                                            }
+                                        }
+                                        var day = partite[j].giorno == '20' ? 'ven.' : 'sab.'
+                                        
+                                        %>
+                        <table class="risultati calendario">
+                            <tbody>
+                                <tr>
+                                    <td><%=day%></span> <%=partite[j].ora%><br/>(campo <%=partite[j].campo%>)</td>
+                                    <td><%=squadraCasa%> <b><%=partite[j].gol_casa%></b><br/><%=squadraOspite%> <b><%=partite[j].gol_ospite%></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                                <%
+                                            }
+                                        }
+                                    %>
+                            </div>
+                            <div class="classifica dr">
+                                <%
+                                if(i == 1){
+                            %>
+                                <h3>
+                                    Classifica
+                                </h3>
+                                <%
+                            }
+                            %>
+                                <div class="squadra">
+                                    <div class="nome">
+                                        
+                                    </div>
+                                    <div class="punti">
+                                        Punti
+                                    </div>
+                                </div>
+                                <%
+                                var n = 0,
+                                    array = []
+                                for(var j=0; j<squadre.length; j++){
+                                    if(squadre[j].girone == i){
+                                        array.push({
+                                            nome: squadre[j].nome,
+                                            punti: squadre[j].punti
+                                        })
+                                    }
+                                }
+                                
+                                array.sort((a,b) => b.punti-a.punti);
+                                
+                                for(var j=0; j<array.length; j++){
+                            %>
+                                <div class="squadra <%=n<2?'passato' : ''%>">
+                                    <div class="nome"><%=array[j].nome%></div>
+                                    <div class="punti"><%=array[j].punti%></div>
+                                </div>
+                                <%
+                                        n++
+                                }
+                            %>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+        <style>
+            table.risultati {
+                width: 100%;
+                border: 1px solid #167D39;
+            }
+            
+            table.risultati th,
+            table.risultati td {
+                border: 1px solid #167D39;
+                text-align: center;
+                font-size: 24px;
+                padding-top: 10px;
+            }
+            
+            .risultati.gironi.desktop th,
+            .risultati.gironi.desktop td {
+                width: 25%;
+            }
+            
+            .risultati.calendario th:first-of-type {
+                font-size: 16px;
+            }
+            .risultati.calendario th {
+                font-size: 20px;
+            }
+            .risultati.calendario td {
+                font-size: 16px;
+            }
+            
+            table.risultati.calendario th:first-of-type,
+            table.risultati.calendario td:first-of-type {
+                width: 30%;
+            }
+            
+            table.risultati.calendario.mobile th:first-of-type {
+                font-size: 16px;
+            }
+            
+            .dr .squadra {
+                display: flex;
+                flex-direction: row;
+                padding: 20px;
+            }
+            .dr .punti {
+                width: 20%;
+            }
+            
+            .dr .nome {
+                width: 80%;
+                text-align: left;
+            }
+            .passato {
+                background: #abf9ab;
+            }
+            
+            .classifica {
+                text-align: center;
+                margin: 0 auto;
+                align-self: center;
+                font-size: 22px !important;
+            }
+        </style>
+    </body>
+</html>

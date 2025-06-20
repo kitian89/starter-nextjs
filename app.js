@@ -905,8 +905,21 @@ app.get('/', function(req, res) {
         res.render('t_risultati-tv-v2', {database: data, title: 'Partite torneo', env: env, host: host, pageUrl: pageUrl})
     });
 })
+.get('/partite-torneo-sito', function(req, res){
+    var host = req.hostname,
+        env = host && (host.indexOf('asdtagliamento.it') != -1) ? 'production' : 'staging',
+        pageUrl = req.url,
+        database = require('./tagliamento_module')
 
+    if(env == 'staging'){
+        res.setHeader('X-Robots-Tag', 'noindex');
+    }
 
+    database.find({}, (err, data) => {
+        if (err){ throw err};
+        res.render('t_risultati-torneo-sito', {database: data, title: 'Partite torneo', env: env, host: host, pageUrl: pageUrl})
+    });
+})
 
 
 
