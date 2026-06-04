@@ -638,15 +638,17 @@ app.get('/', function(req, res) {
 
         // -------------------------- UPDATE ----------------------------------------
             case 'editTeam':
-                action = 'update'
-                elToSet = {
-                    _id: params['databaseID'],
-                    'coppaChiosco._id': params['coppaChiosco-id']
-                }
-                toSet = {
-                    "$set": {
-                        'coppaChiosco.$.nome': params['name'], 
-                        'coppaChiosco.$.qty': params['qty'],
+                if(params['qty']){
+                    action = 'update'
+                    elToSet = {
+                        _id: params['databaseID'],
+                        'coppaChiosco._id': params['coppaChiosco-id']
+                    }
+                    toSet = {
+                        "$set": {
+                            'coppaChiosco.$.nome': params['name'], 
+                            'coppaChiosco.$.qty': params['qty']
+                        }
                     }
                 }
                 break;
