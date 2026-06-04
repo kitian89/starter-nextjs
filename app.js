@@ -780,7 +780,12 @@ app.get('/', function(req, res) {
             
             case 'removeTeam':
                 action = 'remove'
-                toPull = {"$pull": {'coppaChiosco': { '_id': params['coppaChiosco-id']} }}
+                toPull = {"$pull": {'squadreTorneo': { '_id': params['squadra-id']} }}
+                break;
+                
+            case 'removeMatch':
+                action = 'remove'
+                toPull = {"$pull": {'partiteTorneo': { '_id': params['partita-id']} }}
                 break;
 
         // -------------------------- UPDATE ----------------------------------------
@@ -862,7 +867,7 @@ app.get('/', function(req, res) {
                 }
             )
         }else if(action == 'remove'){
-            database.findOneAndUpdate({_id: params['idDatabase']}, toPull, function(err) {
+            database.findOneAndUpdate({_id: params['databaseID']}, toPull, function(err) {
                 if (err) throw err;
                 console.log('Delete completato');
     

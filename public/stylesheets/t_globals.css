@@ -577,3 +577,7 @@ body.mobile .news-container .audio audio {
 .finita {
     background: rgb(255, 0, 0,.3);
 }
+
+.text-right {
+    text-align: right;
+}

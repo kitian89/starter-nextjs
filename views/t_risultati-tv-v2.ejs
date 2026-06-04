@@ -51,7 +51,7 @@
         <div class="">
             <div class="gironi">
                 <%
-                    for(var i=1; i<=4; i++){
+                    for(var i=1; i<=3; i++){
                 %>
                 <div class="girone">
                     
@@ -70,7 +70,7 @@
                                                 squadraOspite = squadre[k].nome
                                             }
                                         }
-                                        var day = partite[j].giorno == '20' ? 'ven.' : 'sab.'
+                                        var day = (partite[j].giorno == '20' || partite[j].giorno == 'ven') ? 'ven.' : 'sab.'
                                         
                                         %>
                                             <div class="partite">
@@ -171,10 +171,10 @@
                             <div class="partite">
                                 <div class="partita">
                                     <div class="squadra" style="display: flex; justify-content: space-between;">
-                                        <span><%=squadraCasa%></span><span><%=partite[j].gol_casa%></span>                            
+                                        <span><%=squadraCasa%></span><span><%=partite[j].finita == true ? partite[j].gol_casa : '-'%></span>                            
                                     </div>
                                     <div class="squadra" style="display: flex; justify-content: space-between;">
-                                        <span><%=squadraOspite%></span><span><%=partite[j].gol_ospite%></span>     
+                                        <span><%=squadraOspite%></span><span><%=partite[j].finita == true ? partite[j].gol_ospite : '-'%></span>     
                                     </div>
                                     <div class="infoPartita">
                                         <%=partite[j].ora%> | campo <%=partite[j].campo%>
@@ -206,10 +206,10 @@
                                 <div class="partite">
                                     <div class="partita">
                                         <div class="squadra" style="display: flex; justify-content: space-between;">
-                                            <span><%=squadraCasa%></span><span><%=partite[j].gol_casa%></span>                          
+                                            <span><%=squadraCasa%></span><span><%=partite[j].finita == true ? partite[j].gol_casa : '-'%></span>                          
                                         </div>
                                         <div class="squadra" style="display: flex; justify-content: space-between;">
-                                            <span><%=squadraOspite%></span><span><%=partite[j].gol_ospite%></span>                               
+                                            <span><%=squadraOspite%></span><span><%=partite[j].finita == true ? partite[j].gol_ospite : '-'%></span>                               
                                         </div>
                                         <div class="infoPartita">
                                             <%=partite[j].ora%> | campo <%=partite[j].campo%>
@@ -240,11 +240,16 @@
                             %>
                                 <div class="partite">
                                     <div class="partita">
-                                        <div class="squadra" style="display: flex; justify-content: space-between; font-size: 30px;">
-                                            <span><%=squadraCasa%></span><span><%=partite[j].gol_casa%></span>                            
+                                        <%
+                                            var winnerHome = (partite[j].finita && partite[j].gol_casa > partite[j].gol_ospite) ? 'winner' : '',
+                                                winnerAway = (partite[j].finita && partite[j].gol_casa < partite[j].gol_ospite) ? 'winner' : ''
+                                            
+                                        %>
+                                        <div class="squadra <%=winnerHome%>" style="display: flex; justify-content: space-between; font-size: 30px;">
+                                            <span><%=squadraCasa%></span><span><%= partite[j].finita == true ? partite[j].gol_casa : '-'%></span>                            
                                         </div>
-                                        <div class="squadra" style="display: flex; justify-content: space-between; font-size: 30px;">
-                                            <span><%=squadraOspite%></span><span><%=partite[j].gol_ospite%></span>                            
+                                        <div class="squadra <%=winnerAway%>" style="display: flex; justify-content: space-between; font-size: 30px;">
+                                            <span><%=squadraOspite%></span><span><%=partite[j].finita == true ? partite[j].gol_ospite : '-'%></span>                            
                                         </div>
                                         <div class="infoPartita">
                                             <%=partite[j].ora%> | campo <%=partite[j].campo%>
@@ -273,10 +278,10 @@
                     <h4>Terzo / Quarto Posto</h4>
                     <div class="partita">
                         <div class="squadra" style="display: flex; justify-content: space-between;">
-                            <span><%=squadraCasa%></span><span><%=partite[j].gol_casa%></span>                            
+                            <span><%=squadraCasa%></span><span><%=partite[j].finita == true ? partite[j].gol_casa : '-'%></span>                            
                         </div>
                         <div class="squadra" style="display: flex; justify-content: space-between;">
-                            <span><%=squadraOspite%></span><span><%=partite[j].gol_ospite%></span>                            
+                            <span><%=squadraOspite%></span><span><%=partite[j].finita == true ? partite[j].gol_ospite : '-'%></span>                            
                         </div>
                         <div class="infoPartita">
                             <%=partite[j].ora%> | campo <%=partite[j].campo%>
@@ -452,6 +457,18 @@
 
             .faseFinale .finale h4 {
                 text-align: center;
+            }
+            
+            .finale .winner {
+                  background: conic-gradient(
+    from 130deg,
+    #D4AF37,
+    #FFFDD0,
+    #AA771C,
+    #FDF6C7,
+    #D4AF37
+  );
+
             }
 
         </style>
